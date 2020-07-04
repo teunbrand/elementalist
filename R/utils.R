@@ -69,7 +69,10 @@ inherit_unit <- function(x, ptype = NULL, default) {
   if (is.null(ptype)) {
     return(unit(x, default))
   }
-  type <- unit_type(ptype)
+  type <- if (is.unit(ptype)) {
+    unit_type(ptype)
+  } else {
+    NULL}
   if (!is.null(type)) {
     return(unit(x, type))
   }

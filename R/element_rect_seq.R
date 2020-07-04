@@ -205,7 +205,7 @@ rect_as_polygon <- function(x, y, width, height,
   vrtx <- rep(1:4, length(id))
 
   # Choose concatenation strategy for x
-  concat <- if (!is.null(unit_type(x)) | !is.null(unit_type(width))) {
+  concat <- if (is.unit(x) | is.unit(width)) {
     unit.c
   } else base::c
 
@@ -217,7 +217,7 @@ rect_as_polygon <- function(x, y, width, height,
               x - hjust * width)
 
   # Choose concatenation strategy for y
-  concat <- if (!is.null(unit_type(y)) | !is.null(unit_type(height))) {
+  concat <- if (is.unit(y) | is.unit(height)) {
     unit.c
   } else base::c
 
