@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# elementalist
+# elementalist <img src="man/figures/elementalist-logo.png" align = "right" width = "150" />
 
 <!-- badges: start -->
 
@@ -9,9 +9,12 @@
 status](https://travis-ci.com/teunbrand/elementalist.svg?branch=master)](https://travis-ci.com/teunbrand/elementalist)
 [![Codecov test
 coverage](https://codecov.io/gh/teunbrand/elementalist/branch/master/graph/badge.svg)](https://codecov.io/gh/teunbrand/elementalist?branch=master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of elementalist is to …
+The goal of elementalist is to provide extra, fun theme elements for the
+ggplot2 plotting library. This is mostly a pet project for fun.
 
 ## Installation
 
@@ -24,34 +27,46 @@ devtools::install_github("teunbrand/elementalist")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here is an example how you can make your elements wiggle\!
 
 ``` r
 library(elementalist)
 #> Loading required package: ggplot2
-## basic example code
+
+x <- seq(-3, 3, length.out = 20)
+df <- data.frame(
+  x = c(x, x),
+  y = c(dnorm(x, sd = 1), c(x)/20),
+  cat = rep(LETTERS[1:2], each = 20)
+)
+
+ggplot(df, aes(x, y, colour = cat)) +
+  geom_line_theme(size = 2) +
+  coord_cartesian(clip = "off") +
+  theme(
+    elementalist.geom_line = element_line_wiggle(5, n = 5),
+    panel.background = element_rect_wiggle(sides = c("lb"),
+                                           colour = "black"),
+    panel.grid.major = element_line_wiggle(3),
+    panel.grid.minor = element_line_wiggle(3)
+  )
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+<img src="man/figures/README-wiggle-1.png" width="100%" />
+
+Here is how you can make them colour gradients. It defaults to rainbow
+colours, but you can set your own.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+ggplot(pressure, aes(temperature, pressure)) +
+  geom_line_theme() +
+  theme(
+    elementalist.geom_line = element_line_multicolour(),
+    axis.line = element_line_multicolour()
+  )
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+<img src="man/figures/README-multicolour-1.png" width="100%" />
 
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+This package is still in the experimental phase. Expect some bugs here
+and there and use at your own risk\!
