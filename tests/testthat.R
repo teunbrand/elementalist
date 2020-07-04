@@ -1,4 +1,4 @@
 library(testthat)
-library(Elementalist)
+library(elementalist)
 
-test_check("Elementalist")
+test_check("elementalist")
