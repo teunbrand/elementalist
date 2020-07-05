@@ -2,3 +2,12 @@
 
 language: R
 cache: packages
+
+matrix:
+  include:
+    - r: oldrel
+    - r: release
+    - r: devel
+
+after_success:
+  - Rscript -e 'covr::codecov()'

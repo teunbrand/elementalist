@@ -83,14 +83,20 @@ element_grob.element_rect_seq <- function(
     lty = element$linetype,
     lineend = lineend
   )
+  gp <- modify_list(element_gp, fun_gp)
+  if (is.null(gp$col) || all(is.na(gp$col))) {
+    sides <- c(top = FALSE, left = FALSE, bottom = FALSE, right = FALSE)
+  } else {
+    sides <- element$sides
+  }
   rectseqGrob(
     x, y,
     width, height,
     default.units = default.units,
-    gp = modify_list(element_gp, fun_gp),
+    gp = gp,
     n = element$n,
     fun = element$fun,
-    sides = element$sides,
+    sides = sides,
     ...
   )
 }
