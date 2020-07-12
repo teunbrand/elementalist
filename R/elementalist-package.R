@@ -3,6 +3,7 @@
 
 #' @import grid
 #' @import ggplot2
+#' @import vctrs
 #' @importFrom utils assignInMyNamespace getFromNamespace
 #' @importFrom stats runif setNames
 NULL

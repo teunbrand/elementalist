@@ -5,4 +5,6 @@
 * Added `element_rect_seq()` as main rect element customisation point.
 * Added `wiggle()` element style and `element_*_wiggle()`.
 * Added `multicolour()` element style and `element_*_multicolour()`.
-* Added `geom_line_theme()`.
+* Added `geom_line_theme()`/`geom_path_theme()`.
+* Added `geom_rect_theme()`/`geom_tile_theme()`.
+* Added `guide_axis2()` for compatibility with theme elements.

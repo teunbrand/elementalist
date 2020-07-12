@@ -129,3 +129,18 @@ col_interpol <- function(col, n) {
   seq <- seq(0, 1, length.out = n)
   scales::colour_ramp(col)(seq)
 }
+
+.grap_ggplot_internals <- function() {
+  objects <- c("axis_label_element_overrides", "draw_axis_labels")
+  objects <- setNames(nm = objects)
+  out <- lapply(objects, function(i) {
+    utils::getFromNamespace(i, "ggplot2")
+  })
+}
+
+.int <- .grap_ggplot_internals()
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
+

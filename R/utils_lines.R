@@ -89,6 +89,8 @@ apply_lines <- function(
   y  <- lapply(seq, inv_subset, x = y)
   if (length(colour) != 1) {
     if (inherits(colour, "grouped_colour")) {
+      # If it is a grouped colour, it probably comes from a geom
+      # so we can expect it to be of equal length as the x or y
       colour <- lapply(seq, inv_subset, x = colour)
       colour <- lapply(colour, unclass)
       colour <- lapply(colour, `[`, 1)
@@ -122,7 +124,7 @@ apply_lines <- function(
 
 #' Build a polyline or segments grob
 #'
-#' This function decides which one is more appropriate. it checks
+#' This function decides which one is more appropriate.
 #'
 #' @param x A \code{numeric} with x coordinates.
 #' @param y A \code{numeric} with y coordinates.
