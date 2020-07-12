@@ -125,7 +125,12 @@ rectseqGrob <- function(
               length.out = nrow(seg))
 
   # Make prototype
-  proto <- apply_lines(fun, seg$x, seg$y, gp$col, fake_id, default.units, n)
+  colour <- gp$col
+  if (inherits(colour, "grouped_colour")) {
+    colour <- colour[seg$id]
+  }
+  proto <- apply_lines(fun, seg$x, seg$y, colour, fake_id,
+                       default.units, n)
 
   proto_id <- seg$id[proto$id]
   gp_rect <- gp
@@ -208,7 +213,7 @@ rect_as_polygon <- function(x, y, width, height,
 
   # Keep track of separate rectangles and vertices
   id <- seq_along(x)
-  vrtx <- rep(1:4, length(id))
+  vrtx <- rep(1:4, each = length(id))
 
   # Choose concatenation strategy for x
   concat <- if (is.unit(x) | is.unit(width)) {
@@ -235,7 +240,7 @@ rect_as_polygon <- function(x, y, width, height,
               y + (1 - vjust) * height)
 
   # Match ids to expanded coordinates
-  id <- rep(id, each = 4)
+  id <- rep(id, times = 4)
 
   new_df(list(x = x, y = y, id = id, vrtx = vrtx))
 }
