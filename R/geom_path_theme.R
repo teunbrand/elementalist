@@ -1,13 +1,18 @@
+# User functions ----------------------------------------------------------
+
 #' Lines for connected observations
 #'
-#' This mostly functions as \code{\link[ggplot2:geom_path]{geom_line()}} but
-#' replaces default values from the \code{elementalist.geom_line} theme element
-#' and uses it to generate the grob.
+#' These mostly function as \code{\link[ggplot2:geom_path]{geom_line()}} and
+#' \code{geom_path()} but replaces default values from the
+#' \code{elementalist.geom_line} theme element and uses it to generate the grob.
 #'
 #' @inheritParams ggplot2::geom_line
+#' @inheritParams ggplot2::geom_path
 #'
 #' @return A \code{LayerInstance} ggproto object that can be added to a plot.
 #' @export
+#'
+#' @eval ggplot2:::rd_aesthetics("geom", "path_theme")
 #'
 #' @examples
 #' ggplot(pressure, aes(temperature, pressure)) +
@@ -15,6 +20,35 @@
 #'   theme(
 #'     elementalist.geom_line = element_line_wiggle(10, colour = "red", n = 10)
 #'   )
+geom_path_theme <- function(
+  mapping = NULL, data = NULL,
+  stat = "identity", position = "identity",
+  ...,
+  lineend = "butt", linejoin = "round", linemitre = 10,
+  arrow = NULL, na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomPathTheme,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      lineend = lineend,
+      linejoin = linejoin,
+      linemitre = linemitre,
+      arrow = arrow,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @export
+#' @rdname geom_path_theme
 geom_line_theme <- function(
   mapping = NULL,
   data = NULL,
@@ -29,7 +63,7 @@ geom_line_theme <- function(
   layer(data = data,
         mapping = mapping,
         stat = stat,
-        geom = GeomLinetheme,
+        geom = GeomLineTheme,
         position = position,
         show.legend = show.legend,
         inherit.aes = inherit.aes,
@@ -40,8 +74,16 @@ geom_line_theme <- function(
         ))
 }
 
-GeomLinetheme <- ggproto(
-  "GeomLinetheme", GeomLine,
+# ggproto -----------------------------------------------------------------
+
+## path -------------------------------------------------------------------
+
+#' @usage NULL
+#' @format NULL
+#' @export
+#' @rdname elementalist_extensions
+GeomPathTheme <- ggproto(
+  "GeomPathTheme", GeomPath,
   draw_panel = function(self, data, panel_params, coord, arrow = NULL,
                         lineend = "butt", linejoin = "round",
                         linemitre = 10, na.rm = FALSE) {
@@ -55,7 +97,7 @@ GeomLinetheme <- ggproto(
     el <- calc_element("elementalist.geom_line", theme)
     if (length(setdiff(class(el), c("element_line", "element"))) < 1) {
       data[] <- lapply(data, unset_default)
-      grob <- ggproto_parent(GeomLine, self)$draw_panel(
+      grob <- ggproto_parent(GeomPath, self)$draw_panel(
         data, panel_params, coord, arrow = arrow, lineend = lineend,
         linejoin = linejoin, linemitre = linemitre, na.rm = FALSE
       )
@@ -96,7 +138,7 @@ GeomLinetheme <- ggproto(
     end <- c(group_diff, TRUE)
     i <- if (!constant) !end else start
 
-    colour <- if (inherits(munched$colour, "defaulted")) {
+    colour <- if (was_defaulted(munched$colour)) {
       lapply(which(start), function(i) {
         i <- rep(i, length.out = length(el$colour))
         alpha(el$colour, munched$alpha[i])
@@ -133,51 +175,24 @@ GeomLinetheme <- ggproto(
   }
 )
 
-# This is just a temporary hacky solution until ggplot2#2749 is implemented
-sniff_theme <- function(tries = 20) {
-  theme <- NULL
-  for (i in seq_len(tries)) {
-    env <- parent.frame(i)
-    if ("theme" %in% names(env)) {
-      theme <- env$theme
-      break
-    }
-  }
-  if (is.null(theme)) {
-    theme <- theme_get()
-  }
-  theme
-}
 
-set_default <- function(x) {
-  vctrs::new_vctr(x, class = "defaulted", inherit_base_type = TRUE)
-}
+## line -------------------------------------------------------------------
 
-unset_default <- function(x) {
-  class(x) <- setdiff(class(x), c("defaulted", "vctrs_vctr"))
-  x
-}
-
-by_default <- function(x, y) {
-  if (inherits(x, "defaulted")) {
-    if (is.null(y)) {
-      class(x) <- setdiff("defaulted", class(x))
-      return(x)
-    }
-    return(rep_len(y, length(x)))
-  } else {
-    return(x)
-  }
-}
-
+#' @usage NULL
+#' @format NULL
 #' @export
-#' @noRd
-#' @keywords internal
-#' @importFrom vctrs vec_arith vec_arith_base
-vec_arith.defaulted <- function(op, x, y, ...) {
-  vec_arith_base(op, x, y)
-}
-
-as_grouped_colour <- function(x) {
-  vctrs::new_vctr(x, class = "grouped_colour", inherit_base_type = TRUE)
-}
+#' @rdname elementalist_extensions
+GeomLineTheme <- ggproto(
+  "GeomLineTheme", GeomPathTheme,
+  extra_params = c("na.rm", "orientation"),
+  setup_params = function(data, params) {
+    params$flipped_aes <- has_flipped_aes(data, params, ambiguous = TRUE)
+    params
+  },
+  setup_data = function(data, params) {
+    data$flipped_aes <- params$flipped_aes
+    data <- flip_data(data, params$flipped_aes)
+    data <- data[order(data$PANEL, data$group, data$x), ]
+    flip_data(data, params$flipped_aes)
+  }
+)
