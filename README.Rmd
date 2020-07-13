@@ -5,11 +5,16 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+ragg_png = function(..., res = 192) {
+  ragg::agg_png(..., res = res, units = "in")
+}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  dev = "ragg_png",
+  fig.ext = "png"
 )
 ```
 
@@ -49,7 +54,7 @@ ggplot(df, aes(x, y, colour = cat)) +
   geom_line_theme(size = 2) +
   coord_cartesian(clip = "off") +
   theme(
-    elementalist.geom_line = element_line_wiggle(5, n = 5),
+    elementalist.geom_line = element_line_wiggle(6, n = 6),
     panel.background = element_rect_wiggle(sides = c("lb"),
                                            colour = "black"),
     panel.grid.major = element_line_wiggle(3),

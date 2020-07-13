@@ -44,7 +44,7 @@ ggplot(df, aes(x, y, colour = cat)) +
   geom_line_theme(size = 2) +
   coord_cartesian(clip = "off") +
   theme(
-    elementalist.geom_line = element_line_wiggle(5, n = 5),
+    elementalist.geom_line = element_line_wiggle(6, n = 6),
     panel.background = element_rect_wiggle(sides = c("lb"),
                                            colour = "black"),
     panel.grid.major = element_line_wiggle(3),
