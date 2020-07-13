@@ -24,4 +24,5 @@ Imports:
     grid,
     stats,
     scales,
-    vctrs
+    vctrs,
+    gtable
