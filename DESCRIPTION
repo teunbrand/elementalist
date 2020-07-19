@@ -17,7 +17,9 @@ Language: en
 Suggests: 
     testthat,
     covr,
-    utils
+    utils,
+    knitr,
+    rmarkdown
 Depends: 
     ggplot2
 Imports: 
@@ -26,3 +28,6 @@ Imports:
     scales,
     vctrs,
     gtable
+VignetteBuilder: knitr
+URL: https://github.com/teunbrand/elementalist
+BugReports: https://github.com/teunbrand/elementalist/issues

@@ -1,0 +1,23 @@
+---
+title: "elementalist"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{elementalist}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(elementalist)
+```
+
+The elementalist package offers an extended palette of ggplot2 theme elements.
+
+As this is still a work in progress, I hadn't had time to write out a complete guide yet.
