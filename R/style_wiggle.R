@@ -43,7 +43,7 @@
 wiggle <- function(amount = 3, seed = NULL) {
   seed <- force(seed)
   amount <- amount / 2
-  function(x, y, colour, id, n) {
+  function(x, y, colour, size = NULL, id, n) {
     nn <- n * (length(x) - 1) + 1
     id <- rep(id[1], nn)
     if (!is.null(seed)) {
@@ -55,6 +55,9 @@ wiggle <- function(amount = 3, seed = NULL) {
     x <- seq_between(unclass(x), n)
     y <- seq_between(unclass(y), n)
     col <- c(col_interpol(colour, nn - 1), NA)
+    if (!is.null(size)) {
+      size <- c(rep_len(size, length(x) - 1), NA)
+    }
 
     out <- list(
       x = x,
@@ -62,6 +65,7 @@ wiggle <- function(amount = 3, seed = NULL) {
       dx = unclass(xy$x) - x,
       dy = unclass(xy$y) - y,
       col = col,
+      lwd = size,
       id = id
     )
     out[vapply(out, is.null, logical(1))] <- NULL

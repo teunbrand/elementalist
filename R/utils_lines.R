@@ -78,6 +78,7 @@ apply_lines <- function(
   fun = defer,
   x = 0:1, y = 0:1,
   colour = NULL,
+  size = NULL,
   id = rep(1, length(x)),
   default.units = "npc",
   n = 10
@@ -87,23 +88,13 @@ apply_lines <- function(
   seq <- unname(split(seq, id))
   x  <- lapply(seq, inv_subset, x = x)
   y  <- lapply(seq, inv_subset, x = y)
-  if (length(colour) != 1) {
-    if (inherits(colour, "grouped_colour")) {
-      # If it is a grouped colour, it probably comes from a geom
-      # so we can expect it to be of equal length as the x or y
-      colour <- lapply(seq, inv_subset, x = colour)
-      colour <- lapply(colour, unclass)
-      colour <- lapply(colour, `[`, 1)
-    }
-    if (!is.list(colour)) {
-      colour <- rep(list(colour), length(x))
-    }
-  }
+  colour <- grouped_variable(colour, seq)
+  size <- grouped_variable(size, seq)
   id <- lapply(seq, inv_subset, x = id)
 
-
   # Apply function to data
-  outcome <- mapply(fun, x = x, y = y, colour = colour,
+  outcome <- mapply(fun, x = x, y = y,
+                    colour = colour, size = size,
                     id = id, n = n, SIMPLIFY = FALSE)
   # Stitch data back together
   outcome <- lapply(
@@ -119,7 +110,8 @@ apply_lines <- function(
     x <- x + unit(outcome$dx, "cm")
     y <- y + unit(outcome$dy, "cm")
   }
-  list(x = x, y = y, id = outcome$id, colour = outcome$col)
+  list(x = x, y = y, id = outcome$id,
+       size = outcome$lwd, colour = outcome$col)
 }
 
 #' Build a polyline or segments grob
@@ -183,4 +175,20 @@ decide_linegrob <- function(x, y, id, gp = gpar(), ...) {
       gp = gp, ...
     )
   }
+}
+
+grouped_variable <- function(var, seq) {
+  if (length(var) != 1) {
+    if (inherits(var, "grouped_colour")) {
+      # If it is a grouped colour, it probably comes from a geom
+      # so we can expect it to be of equal length as the x or y
+      var <- lapply(seq, inv_subset, x = var)
+      var <- lapply(var, unclass)
+      var <- lapply(var, `[`, 1)
+    }
+    if (!is.list(var)) {
+      var <- rep(list(var), length(seq))
+    }
+  }
+  return(var)
 }

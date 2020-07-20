@@ -129,12 +129,17 @@ rectseqGrob <- function(
   if (inherits(colour, "grouped_colour")) {
     colour <- colour[seg$id]
   }
-  proto <- apply_lines(fun, seg$x, seg$y, colour, fake_id,
+  size <- gp$lwd
+  if (inherits(size, "grouped_colour")) {
+    size <- size[seg$id]
+  }
+  proto <- apply_lines(fun, seg$x, seg$y, colour, size, fake_id,
                        default.units, n)
 
   proto_id <- seg$id[proto$id]
   gp_rect <- gp
-  gp_rect$col <- proto$colour[!duplicated(proto_id)]
+  gp_rect$col <- check_zerolength(proto$colour[!duplicated(proto_id)])
+  gp_rect$lwd <- check_zerolength(proto$size[!duplicated(proto_id)])
 
   # Make prototype into rectangle-polygon
   rect <- polygonGrob(
@@ -186,6 +191,7 @@ rectseqGrob <- function(
   }
   edges$id <- edges$id[keep]
   gp$col <- check_zerolength(edges$colour)
+  gp$lwd <- check_zerolength(edges$size[keep])
 
   edges <- decide_linegrob(
     x = edges$x, y = edges$y, id = edges$id, gp = gp,

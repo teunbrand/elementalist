@@ -52,20 +52,25 @@ element_grob.element_line_seq <- function(
 ) {
   fun_gp <- gpar(
     # col = colour, fill = colour,
-    lwd = check_zerolength(size * .pt),
+    # lwd = check_zerolength(size * .pt),
     lty = linetype,
     lineend = lineend
   )
   element_gp <- gpar(
     # col = element$colour,
     fill = element$colour,
-    lwd = check_zerolength(element$size * .pt),
+    # lwd = check_zerolength(element$size * .pt),
     lty = element$linetype,
     lineend = lineend
   )
 
   if (is.null(colour)) {
     colour <- element$colour
+  }
+  if (is.null(size)) {
+    size <- check_zerolength(element$size * .pt)
+  } else {
+    size <- check_zerolength(size * .pt)
   }
 
   arrow <- if (is.logical(element$arrow) && !element$arrow) {
@@ -78,6 +83,7 @@ element_grob.element_line_seq <- function(
     x, y,
     default.units = default.units,
     colour = colour,
+    size = size,
     gp = modify_list(element_gp, fun_gp),
     id = id,
     id.lengths = id.lengths,
@@ -95,6 +101,7 @@ lineseqGrob <- function(x = 0:1, y = 0:1,
                         id = NULL, id.lengths = NULL,
                         default.units = "npc",
                         colour = NULL,
+                        size = NULL,
                         arrow = NULL,
                         name = NULL,
                         n = 10,
@@ -103,10 +110,13 @@ lineseqGrob <- function(x = 0:1, y = 0:1,
                         vp = NULL) {
   id <- resolve_id(id, id.lengths, length(x))
   force(gp)
-  proto <- apply_lines(fun, x, y, colour, id, default.units, n)
+  proto <- apply_lines(fun, x, y, colour, size, id, default.units, n)
 
   if (!is.null(proto$colour)) {
     gp$col <- check_zerolength(proto$colour)
+  }
+  if (!is.null(proto$size)) {
+    gp$lwd <- check_zerolength(proto$size)
   }
 
   decide_linegrob(

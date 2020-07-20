@@ -20,7 +20,7 @@
 #' @examples
 #' element_line_multicolour()
 multicolour <- function() {
-  function(x, y, colour, id, n) {
+  function(x, y, colour, size = NULL, id, n) {
     if (!is.null(colour)) {
       n <- n  + 1
     }
@@ -28,11 +28,15 @@ multicolour <- function() {
     x <- seq_between(unclass(x), n)
     y <- seq_between(unclass(y), n)
     col <- c(col_interpol(colour, nn), NA)
+    if (!is.null(size)) {
+      size <- c(rep_len(size, length(x) - 1), NA)
+    }
     id <- rep(id[1], length(x))
     out <- list(
       x = x,
       y = y,
       col = col,
+      lwd = size,
       id = id
     )
     out[vapply(out, is.null, logical(1))] <- NULL
