@@ -144,7 +144,7 @@ GeomPathTheme <- ggproto(
         alpha(el$colour, munched$alpha[i])
       })
     } else {
-      colour <- as_grouped_colour(alpha(munched$colour, munched$alpha))
+      colour <- as_grouped_variable(alpha(munched$colour, munched$alpha))
     }
 
 

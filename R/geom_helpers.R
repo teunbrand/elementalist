@@ -33,8 +33,8 @@ vec_arith.defaulted <- function(op, x, y, ...) {
   vec_arith_base(op, x, y)
 }
 
-as_grouped_colour <- function(x) {
-  vctrs::new_vctr(x, class = "grouped_colour", inherit_base_type = TRUE)
+as_grouped_variable <- function(x) {
+  vctrs::new_vctr(x, class = "grouped_variable", inherit_base_type = TRUE)
 }
 
 new_default <- function(x = double()) {

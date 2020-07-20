@@ -120,7 +120,7 @@ GeomRectTheme <- ggproto(
       if (was_defaulted(coords$colour)) {
         colour <- el$colour
       } else {
-        colour <- as_grouped_colour(coords$colour)
+        colour <- as_grouped_variable(coords$colour)
       }
 
       grob <- element_grob(

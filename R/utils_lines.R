@@ -179,7 +179,7 @@ decide_linegrob <- function(x, y, id, gp = gpar(), ...) {
 
 grouped_variable <- function(var, seq) {
   if (length(var) != 1) {
-    if (inherits(var, "grouped_colour")) {
+    if (inherits(var, "grouped_variable")) {
       # If it is a grouped colour, it probably comes from a geom
       # so we can expect it to be of equal length as the x or y
       var <- lapply(seq, inv_subset, x = var)
