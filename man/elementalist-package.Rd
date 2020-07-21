@@ -9,6 +9,14 @@
 Elementalist provides extra theme elements that fit in ggplot2's 
     theme system.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/teunbrand/elementalist}
+  \item Report bugs at \url{https://github.com/teunbrand/elementalist/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Teun van den Brand \email{tahvdbrand@gmail.com} (\href{https://orcid.org/0000-0002-9335-7468}{ORCID})
 

@@ -126,15 +126,22 @@ rectseqGrob <- function(
 
   # Make prototype
   colour <- gp$col
-  if (inherits(colour, "grouped_colour")) {
+  if (inherits(colour, "grouped_variable")) {
     colour <- colour[seg$id]
   }
   size <- gp$lwd
-  if (inherits(size, "grouped_colour")) {
+  if (inherits(size, "grouped_variable")) {
     size <- size[seg$id]
   }
   proto <- apply_lines(fun, seg$x, seg$y, colour, size, fake_id,
                        default.units, n)
+  proto2 <- proto
+  if (!is.null(proto$sub_id)) {
+    keep <- !duplicated(proto$id)
+    proto <- lapply(proto, `[`, keep)
+    proto$colour <- proto2$colour
+    proto$size <- proto2$size
+  }
 
   proto_id <- seg$id[proto$id]
   gp_rect <- gp
@@ -149,7 +156,7 @@ rectseqGrob <- function(
   )
 
   # Check for uniform colour
-  colour <- proto$colour
+  colour <- proto2$colour
   unicol <- length(colour) == length(proto_id)
   if (unicol) {
     unicol <- all(vapply(split(colour, proto_id), function(x) {
@@ -170,13 +177,18 @@ rectseqGrob <- function(
   }
 
   # Make prototype into edges-polyline (already is polyline)
-  edges <- proto
+  edges <- proto2
   edges$name <- paste0(rect$name, ".", sample(1000, 1))
 
   # Figure out what sides to keep
   sides <- unname(sides[part])
   keep <- sides[edges$id]
 
+  if (!is.null(edges$sub_id)) {
+    id <- paste0(proto2$id, "$", proto2$sub_id)
+    edges$id <- match(id, unique(id))
+    gp$lineend <- "round"
+  }
   # Subset edges
   edges$x <- edges$x[keep]
   edges$y <- edges$y[keep]

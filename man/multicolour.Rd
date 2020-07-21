@@ -51,10 +51,10 @@ Interpolates lines and colour vectors, creating a gradient-like line. The
 }
 \details{
 The \code{multicolour} function is a function factory that produces
-a function, that subsequently can be used to gradient-colour points.
+a function, that subsequently can be used to gradient-colour lines.
 
 For the \code{element_rect_multicolour()} the gradient is applied to each
-side seperately.
+side separately.
 }
 \examples{
 element_line_multicolour()

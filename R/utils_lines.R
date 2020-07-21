@@ -111,7 +111,8 @@ apply_lines <- function(
     y <- y + unit(outcome$dy, "cm")
   }
   list(x = x, y = y, id = outcome$id,
-       size = outcome$lwd, colour = outcome$col)
+       size = outcome$lwd, colour = outcome$col,
+       sub_id = outcome$sub_id)
 }
 
 #' Build a polyline or segments grob
@@ -149,6 +150,8 @@ decide_linegrob <- function(x, y, id, gp = gpar(), ...) {
       },
       integer(1))
       if (all(nunique == 1)) {
+        gp$col <- gp$col[!duplicated(id)]
+        gp$lwd <- gp$lwd[!duplicated(id)]
         polyline <- TRUE
       } else {
         polyline <- FALSE

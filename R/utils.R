@@ -144,3 +144,12 @@ col_interpol <- function(col, n) {
   if (is.null(x)) y else x
 }
 
+
+extract_alpha <- function(colour) {
+  if (all(nchar(colour) != 9)) {
+    return(rep(1, length(colour)))
+  }
+  colour <- substr(colour, 8, 9)
+  colour[nchar(colour) != 2] <- "FF"
+  as.integer(as.hexmode(colour)) / 255
+}

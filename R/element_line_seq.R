@@ -118,10 +118,16 @@ lineseqGrob <- function(x = 0:1, y = 0:1,
   if (!is.null(proto$size)) {
     gp$lwd <- check_zerolength(proto$size)
   }
+  if (!is.null(proto$sub_id)) {
+    id <- paste0(proto$id, "$", proto$sub_id)
+    id <- match(id, unique(id))
+  } else {
+    id <- proto$id
+  }
 
   decide_linegrob(
     x = proto$x, y = proto$y,
-    id = proto$id,
+    id = id,
     default.units = default.units, arrow = arrow,
     name = name, gp = gp, vp = vp
   )

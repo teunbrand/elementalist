@@ -86,7 +86,6 @@ geom_tile_theme <- function(
 GeomRectTheme <- ggproto(
   "GeomRectTheme", GeomRect,
   draw_panel = function(self, data, panel_params, coord, linejoin = "mitre") {
-    # browser()
     theme <- sniff_theme()
 
     el <- calc_element("elementalist.geom_rect", theme)

@@ -33,5 +33,5 @@ test_that("geom_line_theme can change line appearance", {
   expect_length(cases[[2]]$gp$col, 918)
 
   expect_length(cases[[3]]$x, 19)
-  expect_length(cases[[3]]$gp$col, 19)
+  expect_length(cases[[3]]$gp$col, 1)
 })
