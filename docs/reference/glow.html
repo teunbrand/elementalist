@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wiggle style — wiggle • elementalist</title>
+<title>Glowing lines — glow • elementalist</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Wiggle style — wiggle" />
-<meta property="og:description" content="'Wiggle' is a theme style that adds an amount of cumulative uniform noise to
-interpolated lines, making them wiggle a bit." />
+<meta property="og:title" content="Glowing lines — glow" />
+<meta property="og:description" content="Makes copies of lines with increasing size and decreasing alpha, giving an
+glowing appearance. The element_*_glow() functions are convenience
+wrappers around element_*_seq()." />
 
 
 
@@ -115,33 +116,29 @@ interpolated lines, making them wiggle a bit." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Wiggle style</h1>
-    <small class="dont-index">Source: <a href='https://github.com/teunbrand/elementalist/blob/master/R/style_wiggle.R'><code>R/style_wiggle.R</code></a></small>
-    <div class="hidden name"><code>wiggle.Rd</code></div>
+    <h1>Glowing lines</h1>
+    <small class="dont-index">Source: <a href='https://github.com/teunbrand/elementalist/blob/master/R/style_glow.R'><code>R/style_glow.R</code></a></small>
+    <div class="hidden name"><code>glow.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>'Wiggle' is a theme style that adds an amount of cumulative uniform noise to
-interpolated lines, making them wiggle a bit.</p>
+    <p>Makes copies of lines with increasing size and decreasing alpha, giving an
+glowing appearance. The <code>element_*_glow()</code> functions are convenience
+wrappers around <code>element_*_seq()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wiggle</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>glow</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 
-<span class='fu'>element_line_wiggle</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'>element_line_glow</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)
 
-<span class='fu'>element_rect_wiggle</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>element_rect_glow</span>(<span class='kw'>amount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>amount</th>
-      <td><p>A <code>numeric</code> of length 1 setting the amount of wiggling to
-occur.</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>An <code>integer</code> to set the seed for reproducible wiggling.</p></td>
+      <td><p>A <code>numeric</code> larger than 0 for the amount of glow to add.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -178,31 +175,22 @@ respectively. Including all these letters will draw all rectangle edges
     <p>A <code>function</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The amount of wiggle added to lines and rectangles is absolute. This
-makes it easier to make more uniform wiggles, but causes relative distortion
-when resizing the plot window or device.</p>
-<p>The <code>element_*_wiggle()</code> functions are convenience wrappers around
-<code>element_*_seq()</code>.</p>
-<p>The <code>wiggle()</code> function is a function factory that produces a
-function, that subsequently can be used to wiggle points.</p>
+    <p>The <code>glow</code> function is a function factory that produces a
+function, that subsequently can be used to make lines glow.</p>
+<p>When the elements have no colours by setting them to <code>NA</code>, this will not
+draw glowing lines.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>plot</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='no'>mpg</span>, <span class='fu'>aes</span>(<span class='no'>displ</span>, <span class='no'>hwy</span>)) +
-  <span class='fu'>geom_point</span>() +
-  <span class='fu'>facet_wrap</span>(~ <span class='no'>drv</span>)
-
-<span class='co'># Line wiggles</span>
-<span class='no'>plot</span> + <span class='fu'>theme</span>(
-  <span class='kw'>axis.line</span> <span class='kw'>=</span> <span class='fu'>element_line_wiggle</span>(<span class='fl'>1</span>),
-  <span class='kw'>panel.grid.major</span> <span class='kw'>=</span> <span class='fu'>element_line_wiggle</span>(<span class='fl'>1</span>)
-)</div><div class='img'><img src='wiggle-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Turning clipping off makes the panel background wiggle better</span>
-<span class='no'>plot</span> +
-  <span class='fu'>coord_cartesian</span>(<span class='kw'>clip</span> <span class='kw'>=</span> <span class='st'>"off"</span>) +
-  <span class='fu'>theme</span>(
-    <span class='kw'>strip.background</span> <span class='kw'>=</span> <span class='fu'>element_rect_wiggle</span>(),
-    <span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='fu'>element_rect_wiggle</span>(<span class='kw'>sides</span> <span class='kw'>=</span> <span class='st'>"lb"</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)
-  )</div><div class='img'><img src='wiggle-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>element_line_glow</span>()</div><div class='output co'>#&gt; List of 8
+#&gt;  $ colour       : NULL
+#&gt;  $ size         : NULL
+#&gt;  $ linetype     : NULL
+#&gt;  $ lineend      : NULL
+#&gt;  $ arrow        : logi FALSE
+#&gt;  $ inherit.blank: logi FALSE
+#&gt;  $ n            : num 50
+#&gt;  $ fun          :function (x, y, colour, size = 1, id, n)  
+#&gt;  - attr(*, "class")= chr [1:3] "element_line_seq" "element_line" "element"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

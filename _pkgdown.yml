@@ -1,4 +1,5 @@
 destination: docs
+
 template:
   params:
-    bootswatch: sketchy
+    bootswatch: simplex

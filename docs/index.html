@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Extra elements for ggplot2 • elementalist</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sketchy/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -79,16 +79,24 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of elementalist is to provide extra, fun theme elements for the ggplot2 plotting library. This is mostly a pet project for fun.</p>
-<div id="installation" class="section level2">
+<p><em>/ˌɛlɪˈmɛntlɪst/</em></p>
+<div id="an-element-of-whimsy" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#an-element-of-whimsy" class="anchor"></a>An element of whimsy</h2>
+<p>elementalist extends the theme element options of <a href="http://ggplot2.tidyverse.org"><code>ggplot2</code></a>. It provides variations on rectangular and line elements that go into ggplot2’s <code>theme()</code> function, which tweaks the appearance of your plots. The package also has some geoms that are instructed to draw their lines and rectangles according to the theme. This is mostly a pet project that still needs some time to grow.</p>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"teunbrand/elementalist"</span>)</pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div id="examples" class="section level3">
+<h3 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h3>
+<p>At the moment, the package has three ‘styles’ to choose from for lines. They are <em>‘wiggle’</em>, <em>‘multicolour’</em> and <em>‘glow’</em>.</p>
+<div id="wiggle" class="section level4">
+<h4 class="hasAnchor">
+<a href="#wiggle" class="anchor"></a>Wiggle</h4>
 <p>Here is an example how you can make your elements wiggle!</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">elementalist</span>)
 <span class="co">#&gt; Loading required package: ggplot2</span>
@@ -101,7 +109,7 @@
 )
 
 <span class="fu">ggplot</span>(<span class="no">df</span>, <span class="fu">aes</span>(<span class="no">x</span>, <span class="no">y</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">cat</span>)) +
-  <span class="fu"><a href="reference/geom_path_theme.html">geom_line_theme</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
+  <span class="fu"><a href="reference/geom_path_theme.html">geom_line_theme</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
   <span class="fu">coord_cartesian</span>(<span class="kw">clip</span> <span class="kw">=</span> <span class="st">"off"</span>) +
   <span class="fu">theme</span>(
     <span class="kw">elementalist.geom_line</span> <span class="kw">=</span> <span class="fu"><a href="reference/wiggle.html">element_line_wiggle</a></span>(<span class="fl">6</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">6</span>),
@@ -111,15 +119,53 @@
     <span class="kw">panel.grid.minor</span> <span class="kw">=</span> <span class="fu"><a href="reference/wiggle.html">element_line_wiggle</a></span>(<span class="fl">3</span>)
   )</pre></div>
 <p><img src="reference/figures/README-wiggle-1.png" width="100%"></p>
+</div>
+<div id="multicolour" class="section level4">
+<h4 class="hasAnchor">
+<a href="#multicolour" class="anchor"></a>Multicolour</h4>
 <p>Here is how you can make them colour gradients. It defaults to rainbow colours, but you can set your own.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu">ggplot</span>(<span class="no">pressure</span>, <span class="fu">aes</span>(<span class="no">temperature</span>, <span class="no">pressure</span>)) +
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu">ggplot</span>(<span class="no">economics</span>, <span class="fu">aes</span>(<span class="no">date</span>, <span class="no">unemploy</span>)) +
   <span class="fu"><a href="reference/geom_path_theme.html">geom_line_theme</a></span>() +
   <span class="fu">theme</span>(
     <span class="kw">elementalist.geom_line</span> <span class="kw">=</span> <span class="fu"><a href="reference/multicolour.html">element_line_multicolour</a></span>(),
-    <span class="kw">axis.line</span> <span class="kw">=</span> <span class="fu"><a href="reference/multicolour.html">element_line_multicolour</a></span>()
+    <span class="kw">axis.line</span> <span class="kw">=</span> <span class="fu"><a href="reference/multicolour.html">element_line_multicolour</a></span>(),
+    <span class="kw">panel.grid.minor</span> <span class="kw">=</span> <span class="fu"><a href="reference/multicolour.html">element_line_multicolour</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"transparent"</span>, <span class="st">"white"</span>))
   )</pre></div>
 <p><img src="reference/figures/README-multicolour-1.png" width="100%"></p>
+</div>
+<div id="glow" class="section level4">
+<h4 class="hasAnchor">
+<a href="#glow" class="anchor"></a>Glow</h4>
+<p>Glowing lines work well with a dark background. Elementalist has a theme that makes it easy to make a plot quite dark.</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
+  <span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span>, <span class="fl">12</span>), <span class="fl">2</span>),
+  <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>), <span class="kw">each</span> <span class="kw">=</span> <span class="fl">5</span>),
+  <span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span>:<span class="fl">5</span>, <span class="kw">each</span> <span class="kw">=</span> <span class="fl">2</span>)),
+  <span class="kw">w</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">14</span>)), <span class="fl">2</span>)
+)
+
+<span class="fu">ggplot</span>(<span class="no">df</span>, <span class="fu">aes</span>(<span class="kw">xmin</span> <span class="kw">=</span> <span class="no">x</span> - <span class="no">w</span> / <span class="fl">2</span>, <span class="kw">xmax</span> <span class="kw">=</span> <span class="no">x</span> + <span class="no">w</span> / <span class="fl">2</span>, <span class="kw">ymin</span> <span class="kw">=</span> <span class="no">y</span>, <span class="kw">ymax</span> <span class="kw">=</span> <span class="no">y</span> + <span class="fl">1</span>)) +
+  <span class="fu"><a href="reference/geom_rect_theme.html">geom_rect_theme</a></span>(<span class="fu">aes</span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="no">z</span>), <span class="kw">fill</span> <span class="kw">=</span> <span class="fl">NA</span>) +
+  <span class="fu">scale_colour_manual</span>(
+    <span class="kw">values</span> <span class="kw">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#00E6FF"</span>,<span class="st">"#CF77F0"</span>, <span class="st">"#8F9FFF"</span>,
+                <span class="st">"#2ABEFF"</span>, <span class="st">"#FD006A"</span>)
+  ) +
+  <span class="fu"><a href="reference/theme_black.html">theme_black</a></span>() +
+  <span class="fu">theme</span>(
+    <span class="kw">panel.grid</span> <span class="kw">=</span> <span class="fu"><a href="reference/glow.html">element_line_glow</a></span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="st">"grey10"</span>),
+    <span class="kw">axis.line</span> <span class="kw">=</span> <span class="fu"><a href="reference/glow.html">element_line_glow</a></span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="fu">alpha</span>(<span class="st">"#FD006A"</span>, <span class="fl">0.5</span>)),
+    <span class="kw">axis.ticks</span> <span class="kw">=</span> <span class="fu"><a href="reference/glow.html">element_line_glow</a></span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="fu">alpha</span>(<span class="st">"#FD006A"</span>, <span class="fl">0.5</span>)),
+    <span class="kw">elementalist.geom_rect</span> <span class="kw">=</span> <span class="fu"><a href="reference/glow.html">element_rect_glow</a></span>()
+  )</pre></div>
+<p><img src="reference/figures/README-glow-1.png" width="100%"></p>
+</div>
+</div>
+<div id="footnotes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#footnotes" class="anchor"></a>Footnotes</h3>
 <p>This package is still in the experimental phase. Expect some bugs here and there and use at your own risk!</p>
+<p>The logo is based on the <a href="https://en.wikipedia.org/wiki/Alchemical_symbol#/media/File:Squaredcircle.svg">‘squared circle’</a> alchemical symbol representing the four elements of matter and the philosopher’s stone. With an extra hexagon of course, because this is an R package, after all.</p>
+</div>
 </div>
 </div>
   </div>
