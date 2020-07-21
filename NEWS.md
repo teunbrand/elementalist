@@ -8,3 +8,4 @@
 * Added `geom_line_theme()`/`geom_path_theme()`.
 * Added `geom_rect_theme()`/`geom_tile_theme()`.
 * Added `guide_axis2()` for compatibility with theme elements.
+* Added `glow` element style and `element_*_glow()`.

@@ -47,7 +47,7 @@ A \code{function}.
 }
 \description{
 Makes copies of lines with increasing size and decreasing alpha, giving an
-glowing appearane. The \code{element_*_glow()} functions are convenience
+glowing appearance. The \code{element_*_glow()} functions are convenience
 wrappers around \code{element_*_seq()}.
 }
 \details{
