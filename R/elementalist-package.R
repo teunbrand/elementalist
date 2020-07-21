@@ -4,8 +4,8 @@
 #' @import grid
 #' @import ggplot2
 #' @import vctrs
-#' @importFrom utils assignInMyNamespace getFromNamespace
-#' @importFrom stats runif setNames
+#' @importFrom utils assignInMyNamespace getFromNamespace head
+#' @importFrom stats runif setNames qcauchy
 NULL
 
 # The following block is used by usethis to automatically manage
