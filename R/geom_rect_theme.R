@@ -1,11 +1,17 @@
 # User function -----------------------------------------------------------
 
+#' Thematic rectangles
+#'
 #' These geoms closely follow \code{geom_rect()} and \code{geom_tile()} but take
 #' defaults from the theme and are drawn through theme elements. They use the
 #' \code{elementalist.geom_rect} theme element.
 #'
 #' @inheritParams ggplot2::geom_rect
 #' @inheritParams ggplot2::geom_tile
+#' @param element An \code{element_rect} object, typically constructed with
+#'   \code{element_rect_*} functions. Will inherit from the
+#'   \code{elementalist.geom_rect} theme element. When \code{NULL} this theme
+#'   element is taken directly.
 #'
 #' @return A \code{LayerInstance} object that can be added to a plot.
 #' @export
@@ -33,7 +39,8 @@ geom_rect_theme <- function(mapping = NULL, data = NULL,
                             linejoin = "mitre",
                             na.rm = FALSE,
                             show.legend = NA,
-                            inherit.aes = TRUE) {
+                            inherit.aes = TRUE,
+                            element = NULL) {
   layer(
     data = data,
     mapping = mapping,
@@ -45,6 +52,7 @@ geom_rect_theme <- function(mapping = NULL, data = NULL,
     params = list(
       linejoin = linejoin,
       na.rm = na.rm,
+      element = element,
       ...
     )
   )
@@ -56,7 +64,8 @@ geom_tile_theme <- function(
   mapping = NULL, data = NULL,
   stat = "identity", position = "identity",
   ...,
-  linejoin = "mitre", na.rm = FALSE, show.legend = NA, inherit.aes = TRUE
+  linejoin = "mitre", na.rm = FALSE, show.legend = NA, inherit.aes = TRUE,
+  element = NULL
 ) {
   layer(
     data = data,
@@ -69,6 +78,7 @@ geom_tile_theme <- function(
     params = list(
       linejoin = linejoin,
       na.rm = na.rm,
+      element = element,
       ...
     )
   )
@@ -85,18 +95,10 @@ geom_tile_theme <- function(
 #' @rdname elementalist_extensions
 GeomRectTheme <- ggproto(
   "GeomRectTheme", GeomRect,
-  draw_panel = function(self, data, panel_params, coord, linejoin = "mitre") {
-    theme <- sniff_theme()
+  draw_panel = function(self, data, panel_params, coord, linejoin = "mitre",
+                        element = NULL) {
 
-    el <- calc_element("elementalist.geom_rect", theme)
-    if (length(setdiff(class(el), c("element_rect", "element"))) < 1) {
-      data[] <- lapply(data, unset_default)
-      grob <- ggproto_parent(GeomRect, self)$draw_panel(
-         data = data, panel_params = panel_params,
-         coord = coord, linejoin = linejoin
-      )
-      return(grob)
-    }
+    element <- compute_element(child = element, type = "rect")
 
     if (!coord$is_linear()) {
       aesthetics <- setdiff(
@@ -107,39 +109,27 @@ GeomRectTheme <- ggproto(
            call. = FALSE)
     } else {
       coords <- coord$transform(data, panel_params)
-      if (was_defaulted(coords$fill)) {
-        fill <- rep_len(el$fill, nrow(coords))
-        if (!was_defaulted(coords$alpha)) {
-          fill <- alpha(fill, coords$alpha)
-        }
-      } else {
-        fill <- alpha(coords$fill, coords$alpha)
-      }
-
-      if (was_defaulted(coords$colour)) {
-        colour <- el$colour
-      } else {
-        colour <- as_grouped_variable(coords$colour)
-      }
+      coords <- exchange_defaults(coords, "rect", element)
 
       grob <- element_grob(
-        el,
-        coords$xmin, coords$ymax,
+        element,
+        x = coords$xmin, y = coords$ymax,
         width = coords$xmax - coords$xmin,
         height = coords$ymax - coords$ymin,
         default.units = "native",
         just = c("left", "top"),
-        colour = colour,
-        fill = fill,
-        size = by_default(coords$size, el$size),
-        linetype = by_default(coords$linetype, el$linetype),
-        # linejoin = linejoin,
+        colour = coords$colour,
+        fill = coords$fill,
+        size = coords$size,
+        linetype = coords$linetype,
+        linejoin = linejoin,
         lineend = if (identical(linejoin, "round")) "round" else "square"
       )
       grob
     }
   },
   use_defaults = function(self, data, params = list(), modifiers = aes()) {
+    # Marks variables taken from the default values as the 'defaulted' class.
     provided_names <- union(colnames(data), names(params))
     data <- ggproto_parent(GeomLine, self)$use_defaults(
       data, params, modifiers

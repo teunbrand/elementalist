@@ -9,16 +9,6 @@ base <- ggplot(df, aes(xmin = xmin, xmax = xmax,
                        ymin = ymin, ymax = ymax,
                        fill = colour))
 
-test_that("geom_rect_theme defaults to geom_rect when no theme is set", {
-  case <- base + geom_rect_theme()
-  ctrl <- base + geom_rect()
-  case <- layer_grob(case, 1)[[1]]
-  ctrl <- layer_grob(ctrl, 1)[[1]]
-  case$name <- NULL
-  ctrl$name <- NULL
-  expect_identical(case, ctrl)
-})
-
 test_that("geom_rect_theme can change rect appearance", {
   base  <- base + geom_rect_theme()
   case1 <- base + theme(elementalist.geom_rect = element_rect_wiggle())
@@ -43,4 +33,19 @@ test_that("geom_rect_theme can change rect appearance", {
 
   expect_length(cases[[3]]$x, 16)
   expect_length(cases[[3]]$gp$col, 2)
+})
+
+test_that("geom_rect_theme child elements inherits from theme", {
+  test <- base + geom_rect_theme(
+    element = element_rect_seq(colour = "blue")
+    ) +
+    theme(
+      elementalist.geom_rect = element_rect_seq(linetype = 2)
+    )
+  gt <- ggplotGrob(test)
+  gt <- gt$grobs[[grep("panel", gt$layout$name)]]
+  gt <- gt$children[vapply(gt$children, inherits, logical(1), "polygon")][[1]]
+
+  expect_equal(gt$gp$col, c("blue", "blue"))
+  expect_equal(gt$gp$lty, c(2))
 })

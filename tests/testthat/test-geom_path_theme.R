@@ -1,14 +1,3 @@
-test_that('geom_path_theme defaults to geom_path when no theme is set', {
-  base <- ggplot(pressure, aes(temperature, pressure))
-  case <- base + geom_path_theme()
-  ctrl <- base + geom_path()
-  case <- layer_grob(case, 1)[[1]]
-  ctrl <- layer_grob(ctrl, 1)[[1]]
-  case$name <- NULL
-  ctrl$name <- NULL
-  expect_identical(case, ctrl)
-})
-
 test_that("geom_line_theme can change line appearance", {
   base  <- ggplot(pressure, aes(temperature, pressure)) + geom_path_theme()
   case1 <- base + theme(elementalist.geom_line = element_line_wiggle())

@@ -67,14 +67,16 @@ element_grob.element_rect_seq <- function(
   x = 0.5, y = 0.5,
   width = 1, height = 1,
   fill = NULL, colour = NULL, size = NULL,
-  linetype = NULL, lineend = "butt", default.units = "npc",
+  linetype = NULL, lineend = "butt", linejoin = "mitre",
+  default.units = "npc",
   fun = NULL, ...
 ) {
   fun_gp <- gpar(
     col = colour, fill = fill,
     lwd = check_zerolength(size * .pt),
     lty = linetype,
-    lineend = lineend
+    lineend = lineend,
+    linejoin = linejoin
   )
   element_gp <- gpar(
     col = element$colour,

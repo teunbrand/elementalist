@@ -3,7 +3,7 @@
 \name{geom_path_theme}
 \alias{geom_path_theme}
 \alias{geom_line_theme}
-\title{Lines for connected observations}
+\title{Thematic lines}
 \usage{
 geom_path_theme(
   mapping = NULL,

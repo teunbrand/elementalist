@@ -3,9 +3,7 @@
 \name{geom_rect_theme}
 \alias{geom_rect_theme}
 \alias{geom_tile_theme}
-\title{These geoms closely follow \code{geom_rect()} and \code{geom_tile()} but take
-defaults from the theme and are drawn through theme elements. They use the
-\code{elementalist.geom_rect} theme element.}
+\title{Thematic rectangles}
 \usage{
 geom_rect_theme(
   mapping = NULL,
@@ -16,7 +14,8 @@ geom_rect_theme(
   linejoin = "mitre",
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  element = NULL
 )
 
 geom_tile_theme(
@@ -28,7 +27,8 @@ geom_tile_theme(
   linejoin = "mitre",
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  element = NULL
 )
 }
 \arguments{
@@ -78,6 +78,11 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{element}{An \code{element_rect} object, typically constructed with
+\code{element_rect_*} functions. Will inherit from the
+\code{elementalist.geom_rect} theme element. When \code{NULL} this theme
+element is taken directly.}
 }
 \value{
 A \code{LayerInstance} object that can be added to a plot.
