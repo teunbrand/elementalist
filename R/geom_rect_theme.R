@@ -41,6 +41,10 @@ geom_rect_theme <- function(mapping = NULL, data = NULL,
                             show.legend = NA,
                             inherit.aes = TRUE,
                             element = NULL) {
+  if (!is.null(element) &&
+      !inherits(element, c("element_rect", "element_blank"))) {
+    stop("The `element` argument should be of type `element_rect`")
+  }
   layer(
     data = data,
     mapping = mapping,
@@ -67,6 +71,10 @@ geom_tile_theme <- function(
   linejoin = "mitre", na.rm = FALSE, show.legend = NA, inherit.aes = TRUE,
   element = NULL
 ) {
+  if (!is.null(element) &&
+      !inherits(element, c("element_rect", "element_blank"))) {
+    stop("The `element` argument should be of type `element_rect`")
+  }
   layer(
     data = data,
     mapping = mapping,

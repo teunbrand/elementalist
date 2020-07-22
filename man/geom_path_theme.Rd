@@ -17,7 +17,8 @@ geom_path_theme(
   arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  element = NULL
 )
 
 geom_line_theme(
@@ -29,6 +30,7 @@ geom_line_theme(
   orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE,
+  element = NULL,
   ...
 )
 }
@@ -85,6 +87,11 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{element}{An \code{element_rect} object, typically constructed with
+\code{element_line_*} functions. Will inherit from the
+\code{elementalist.geom_line} theme element. When \code{NULL} this theme
+element is taken directly.}
 
 \item{orientation}{The orientation of the layer. The default (\code{NA})
 automatically determines the orientation from the aesthetic mapping. In the

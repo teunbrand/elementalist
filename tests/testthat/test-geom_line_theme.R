@@ -1,15 +1,4 @@
 
-test_that('geom_line_theme defaults to geom_line when no theme is set', {
-  base <- ggplot(pressure, aes(temperature, pressure))
-  case <- base + geom_line_theme()
-  ctrl <- base + geom_line()
-  case <- layer_grob(case, 1)[[1]]
-  ctrl <- layer_grob(ctrl, 1)[[1]]
-  case$name <- NULL
-  ctrl$name <- NULL
-  expect_identical(case, ctrl)
-})
-
 test_that("geom_line_theme can change line appearance", {
   base  <- ggplot(pressure, aes(temperature, pressure)) + geom_line_theme()
   case1 <- base + theme(elementalist.geom_line = element_line_wiggle())
@@ -35,4 +24,29 @@ test_that("geom_line_theme can change line appearance", {
 
   expect_length(cases[[3]]$x, 19)
   expect_length(cases[[3]]$gp$col, 1)
+})
+
+test_that("geom_line_theme child elements inherits from theme", {
+  test  <- ggplot(pressure, aes(temperature, pressure)) +
+    geom_line_theme(element = element_line_seq(colour = "blue")) +
+    theme(
+      elementalist.geom_line = element_line_seq(linetype = 2)
+    )
+  gt <- ggplotGrob(test)
+  gt <- gt$grobs[[grep("panel", gt$layout$name)]]
+  gt <- gt$children[vapply(gt$children, inherits, logical(1), "polyline")][[1]]
+
+  expect_equal(gt$gp$col, c("blue"))
+  expect_equal(gt$gp$lty, c(2))
+})
+
+test_that("geom_line_theme rejects inappropriate elements", {
+  case <- substitute(geom_line_theme(element = NULL))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_line_theme(element = element_line()))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_line_theme(element = element_rect()))
+  expect_error(eval(case), "should be of type")
 })

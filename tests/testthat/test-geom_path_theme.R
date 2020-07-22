@@ -24,3 +24,28 @@ test_that("geom_line_theme can change line appearance", {
   expect_length(cases[[3]]$x, 19)
   expect_length(cases[[3]]$gp$col, 1)
 })
+
+test_that("geom_path_theme child elements inherits from theme", {
+  test  <- ggplot(pressure, aes(temperature, pressure)) +
+    geom_path_theme(element = element_line_seq(colour = "blue")) +
+    theme(
+      elementalist.geom_line = element_line_seq(linetype = 2)
+    )
+  gt <- ggplotGrob(test)
+  gt <- gt$grobs[[grep("panel", gt$layout$name)]]
+  gt <- gt$children[vapply(gt$children, inherits, logical(1), "polyline")][[1]]
+
+  expect_equal(gt$gp$col, c("blue"))
+  expect_equal(gt$gp$lty, c(2))
+})
+
+test_that("geom_path_theme rejects inappropriate elements", {
+  case <- substitute(geom_path_theme(element = NULL))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_path_theme(element = element_line()))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_path_theme(element = element_rect()))
+  expect_error(eval(case), "should be of type")
+})

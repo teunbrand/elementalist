@@ -9,3 +9,4 @@
 * Added `geom_rect_theme()`/`geom_tile_theme()`.
 * Added `guide_axis2()` for compatibility with theme elements.
 * Added `glow` element style and `element_*_glow()`.
+* Enabled inheriting elements at the layer level.

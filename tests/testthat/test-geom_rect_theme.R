@@ -49,3 +49,14 @@ test_that("geom_rect_theme child elements inherits from theme", {
   expect_equal(gt$gp$col, c("blue", "blue"))
   expect_equal(gt$gp$lty, c(2))
 })
+
+test_that("geom_rect_theme rejects inappropriate elements", {
+  case <- substitute(geom_rect_theme(element = NULL))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_rect_theme(element = element_rect()))
+  expect_silent(eval(case))
+
+  case <- substitute(geom_rect_theme(element = element_line()))
+  expect_error(eval(case), "should be of type")
+})

@@ -1,6 +1,6 @@
 # User functions ----------------------------------------------------------
 
-#' Lines for connected observations
+#' Thematic lines
 #'
 #' These mostly function as \code{\link[ggplot2:geom_path]{geom_line()}} and
 #' \code{geom_path()} but replaces default values from the
@@ -8,6 +8,10 @@
 #'
 #' @inheritParams ggplot2::geom_line
 #' @inheritParams ggplot2::geom_path
+#' @param element An \code{element_rect} object, typically constructed with
+#'   \code{element_line_*} functions. Will inherit from the
+#'   \code{elementalist.geom_line} theme element. When \code{NULL} this theme
+#'   element is taken directly.
 #'
 #' @return A \code{LayerInstance} ggproto object that can be added to a plot.
 #' @export
@@ -26,8 +30,12 @@ geom_path_theme <- function(
   ...,
   lineend = "butt", linejoin = "round", linemitre = 10,
   arrow = NULL, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE, element = NULL
 ) {
+  if (!is.null(element) &&
+      !inherits(element, c("element_line", "element_blank"))) {
+    stop("The `element` argument should be of type `element_line`")
+  }
   layer(
     data = data,
     mapping = mapping,
@@ -42,6 +50,7 @@ geom_path_theme <- function(
       linemitre = linemitre,
       arrow = arrow,
       na.rm = na.rm,
+      element = element,
       ...
     )
   )
@@ -58,8 +67,13 @@ geom_line_theme <- function(
   orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE,
+  element = NULL,
   ...
 ) {
+  if (!is.null(element) &&
+      !inherits(element, c("element_line", "element_blank"))) {
+    stop("The `element` argument should be of type `element_line`")
+  }
   layer(data = data,
         mapping = mapping,
         stat = stat,
@@ -70,6 +84,7 @@ geom_line_theme <- function(
         params = list(
           na.rm = na.rm,
           orientation = orientation,
+          element = element,
           ...
         ))
 }
@@ -85,24 +100,14 @@ geom_line_theme <- function(
 GeomPathTheme <- ggproto(
   "GeomPathTheme", GeomPath,
   draw_panel = function(self, data, panel_params, coord, arrow = NULL,
-                        lineend = "butt", linejoin = "round",
-                        linemitre = 10, na.rm = FALSE) {
+                        lineend = NULL, linejoin = "round",
+                        linemitre = 10, na.rm = FALSE, element) {
     if (!anyDuplicated(data$group)) {
       message("geom_path: Each group consists of only one observation. ",
               "Do you need to adjust the group aesthetic?")
     }
-    # browser()
-    theme <- sniff_theme()
 
-    el <- calc_element("elementalist.geom_line", theme)
-    if (length(setdiff(class(el), c("element_line", "element"))) < 1) {
-      data[] <- lapply(data, unset_default)
-      grob <- ggproto_parent(GeomPath, self)$draw_panel(
-        data, panel_params, coord, arrow = arrow, lineend = lineend,
-        linejoin = linejoin, linemitre = linemitre, na.rm = FALSE
-      )
-      return(grob)
-    }
+    element <- compute_element(child = element, type = "line")
 
     # Sort on group
     data <- data[order(data$group), , drop = FALSE]
@@ -138,33 +143,22 @@ GeomPathTheme <- ggproto(
     end <- c(group_diff, TRUE)
     i <- if (!constant) !end else start
 
-    colour <- if (was_defaulted(munched$colour)) {
-      lapply(which(start), function(i) {
-        i <- rep(i, length.out = length(el$colour))
-        alpha(el$colour, munched$alpha[i])
-      })
-    } else {
-      colour <- as_grouped_variable(alpha(munched$colour, munched$alpha))
-    }
-
-
-    gp <- gpar(
-      lwd = by_default(munched$size, el$size)[i],
-      lty = by_default(munched$linetype, el$linetype)[i],
-      lineend = el$lineend,
-      linejoin = el$linejoin,
-      linemitre = linemitre
-    )
+    nr <- nrow(munched)
+    munched <- exchange_defaults(munched, "line", element)
 
     id <- match(munched$group, unique(munched$group))
     element_grob(
-      el,
-      x = munched$x, y = munched$y, colour = colour,
-      size = gp$lwd, linetype = gp$lty, lineend = lineend,
+      element,
+      x = munched$x, y = munched$y,
+      colour = munched$colour,
+      size = munched$size,
+      linetype = rep_len(munched$linetype, nr)[i],
+      lineend = lineend %||% element$lineend,
       default.units = "native", id = id
     )
   },
   use_defaults = function(self, data, params = list(), modifiers = aes()) {
+    # Marks variables taken from the default values as the 'defaulted' class.
     provided_names <- union(colnames(data), names(params))
     data <- ggproto_parent(GeomLine, self)$use_defaults(
       data, params, modifiers
