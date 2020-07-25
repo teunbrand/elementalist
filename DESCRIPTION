@@ -50,4 +50,5 @@ Collate:
     'utils.R'
     'utils_elements.R'
     'utils_lines.R'
+    'utils_vctrs.R'
     'zzz.R'

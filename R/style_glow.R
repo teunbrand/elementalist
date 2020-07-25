@@ -12,8 +12,10 @@
 #' }
 #'
 #' @param amount A \code{numeric} larger than 0 for the amount of glow to add.
-#' @inheritDotParams element_line_seq
-#' @inheritDotParams element_rect_seq
+#' @inheritParams element_line_seq
+#' @inheritParams element_rect_seq
+#' @param fill Fill colour.
+#' @param ... Arguments passed to \code{element_*_seq()}.
 #'
 #' @details When the elements have no colours by setting them to \code{NA}, this
 #' will not draw glowing lines, as is to be expected.

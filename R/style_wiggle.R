@@ -15,8 +15,10 @@
 #' @param amount A \code{numeric} of length 1 setting the amount of wiggling to
 #'   occur.
 #' @param seed An \code{integer} to set the seed for reproducible wiggling.
-#' @inheritDotParams element_line_seq
-#' @inheritDotParams element_rect_seq
+#' @inheritParams element_line_seq
+#' @inheritParams element_rect_seq
+#' @param fill Fill colour.
+#' @param ... Arguments passed to \code{element_*_seq()}.
 #'
 #' @details The amount of wiggle added to lines and rectangles is absolute. This
 #' makes it easier to make more uniform wiggles, but causes relative distortion

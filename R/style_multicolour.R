@@ -13,8 +13,10 @@
 #'
 #' @param colour A \code{character} vector with colour names or hexadecimal
 #'   notation.
-#' @inheritDotParams element_line_seq
-#' @inheritDotParams element_rect_seq
+#' @inheritParams element_line_seq
+#' @inheritParams element_rect_seq
+#' @param fill Fill colour.
+#' @param ... Arguments passed to \code{element_*_seq()}.
 #'
 #' @details The \code{multicolour} function is a function factory that produces
 #' a function, that subsequently can be used to gradient-colour lines.

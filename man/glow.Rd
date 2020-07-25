@@ -28,32 +28,31 @@ glowing_geoms(
 \arguments{
 \item{amount}{A \code{numeric} larger than 0 for the amount of glow to add.}
 
-\item{...}{
-  Arguments passed on to \code{\link[=element_line_seq]{element_line_seq}}, \code{\link[=element_rect_seq]{element_rect_seq}}
-  \describe{
-    \item{\code{fun}}{A \code{function} to apply to the interpolated lines}
-    \item{\code{n}}{An \code{integer} of length one indicating how many points to
-interpolate.}
-    \item{\code{colour}}{Line/border colour. Color is an alias for colour.}
-    \item{\code{size}}{Line/border size in mm; text size in pts.}
-    \item{\code{linetype}}{Line type. An integer (0:8), a name (blank, solid,
+\item{...}{Arguments passed to \code{element_*_seq()}.}
+
+\item{fill}{Fill colour.}
+
+\item{colour}{Line/border colour. Color is an alias for colour.}
+
+\item{size}{Line/border size in mm; text size in pts.}
+
+\item{linetype}{Line type. An integer (0:8), a name (blank, solid,
 dashed, dotted, dotdash, longdash, twodash), or a string with
 an even number (up to eight) of hexadecimal digits which give the
 lengths in consecutive positions in the string.}
-    \item{\code{lineend}}{Line end Line end style (round, butt, square)}
-    \item{\code{color}}{Line/border colour. Color is an alias for colour.}
-    \item{\code{arrow}}{Arrow specification, as created by \code{\link[grid:arrow]{grid::arrow()}}}
-    \item{\code{inherit.blank}}{Should this element inherit the existence of an
-\code{element_blank} among its parents? If \code{TRUE} the existence of
-a blank element among its parents will cause this element to be blank as
-well. If \code{FALSE} any blank parent element will be ignored when
-calculating final element state.}
-    \item{\code{sides}}{A \code{character} of length one containing any of \code{"t"},
+
+\item{color}{Line/border colour. Color is an alias for colour.}
+
+\item{lineend}{Line end Line end style (round, butt, square)}
+
+\item{sides}{A \code{character} of length one containing any of \code{"t"},
 \code{"l"}, \code{"b"} and/or \code{"r"}. If these letters are present,
 edges are drawn at the top (t), left (l), bottom (b) or right (r),
 respectively. Including all these letters will draw all rectangle edges
 (default), whereas including none of these letters will not draw edges.}
-  }}
+
+\item{n}{An \code{integer} of length one indicating how many points to
+interpolate.}
 }
 \value{
 For \code{glow()}, a \code{function}.
