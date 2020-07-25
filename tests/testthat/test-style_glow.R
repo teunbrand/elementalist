@@ -36,3 +36,13 @@ test_that("element_*_glow grobs can be built", {
   expect_length(ctrl$x, 1)
   expect_length(case$children[[2]]$x, 80)
 })
+
+test_that("glowing_geoms can be added to a theme", {
+  test <- theme_get() + glowing_geoms(colour = "magenta")
+
+  expect_true("elementalist.geom_rect" %in% names(test))
+  expect_true("elementalist.geom_line" %in% names(test))
+
+  expect_equal(test$elementalist.geom_line$colour, "magenta")
+  expect_equal(test$elementalist.geom_rect$colour, "magenta")
+})

@@ -35,3 +35,13 @@ test_that("element_*_wiggle grobs can be built", {
   expect_length(ctrl$x, 1)
   expect_length(case$x, 48)
 })
+
+test_that("multicolour_geoms can be added to a theme", {
+  test <- theme_get() + multicolour_geoms(size = 2.71)
+
+  expect_true("elementalist.geom_rect" %in% names(test))
+  expect_true("elementalist.geom_line" %in% names(test))
+
+  expect_equal(test$elementalist.geom_line$size, 2.71)
+  expect_equal(test$elementalist.geom_rect$size, 2.71)
+})
