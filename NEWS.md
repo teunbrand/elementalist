@@ -1,4 +1,4 @@
-# elementalist 0.0.0.9000
+# elementalist 0.0.0.9000 (development)
 
 * Started package
 * Added `element_line_seq()` as main line element customisation point.

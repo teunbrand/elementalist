@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Thematic lines — geom_path_theme • elementalist</title>
+<title>Thematic bars — geom_col_theme • elementalist</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="Thematic lines — geom_path_theme" />
-<meta property="og:description" content="These mostly function as geom_line() and
-geom_path() but replaces default values from the
-elementalist.geom_line theme element and uses it to generate the grob." />
+<meta property="og:title" content="Thematic bars — geom_col_theme" />
+<meta property="og:description" content="These geoms closely follow the geom_col() and geom_tile() but
+take defaults from the theme and are drawn through theme elements. They use
+the elementalist.geom_rect theme element." />
 
 
 
@@ -116,44 +116,56 @@ elementalist.geom_line theme element and uses it to generate the grob." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Thematic lines</h1>
-    <small class="dont-index">Source: <a href='https://github.com/teunbrand/elementalist/blob/master/R/geom_path_theme.R'><code>R/geom_path_theme.R</code></a></small>
-    <div class="hidden name"><code>geom_path_theme.Rd</code></div>
+    <h1>Thematic bars</h1>
+    <small class="dont-index">Source: <a href='https://github.com/teunbrand/elementalist/blob/master/R/geom_col_theme.R'><code>R/geom_col_theme.R</code></a></small>
+    <div class="hidden name"><code>geom_col_theme.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These mostly function as <code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line()</a></code> and
-<code>geom_path()</code> but replaces default values from the
-<code>elementalist.geom_line</code> theme element and uses it to generate the grob.</p>
+    <p>These geoms closely follow the <code>geom_col()</code> and <code>geom_tile()</code> but
+take defaults from the theme and are drawn through theme elements. They use
+the <code>elementalist.geom_rect</code> theme element.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_path_theme</span>(
+    <pre class="usage"><span class='fu'>geom_col_theme</span>(
   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stack"</span>,
   <span class='no'>...</span>,
-  <span class='kw'>lineend</span> <span class='kw'>=</span> <span class='st'>"butt"</span>,
-  <span class='kw'>linejoin</span> <span class='kw'>=</span> <span class='st'>"round"</span>,
-  <span class='kw'>linemitre</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
-<span class='fu'>geom_line_theme</span>(
+<span class='fu'>geom_bar_theme</span>(
   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"count"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stack"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>orientation</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
+
+<span class='fu'>geom_histogram_theme</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"bin"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stack"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>orientation</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -181,11 +193,6 @@ will be used as the layer data. A <code>function</code> can be created
 from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></td>
     </tr>
     <tr>
-      <th>stat</th>
-      <td><p>The statistical transformation to use on the data for this
-layer, as a string.</p></td>
-    </tr>
-    <tr>
       <th>position</th>
       <td><p>Position adjustment, either as a string, or the result of
 a call to a position adjustment function.</p></td>
@@ -198,20 +205,8 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.</p></td>
     </tr>
     <tr>
-      <th>lineend</th>
-      <td><p>Line end style (round, butt, square).</p></td>
-    </tr>
-    <tr>
-      <th>linejoin</th>
-      <td><p>Line join style (round, mitre, bevel).</p></td>
-    </tr>
-    <tr>
-      <th>linemitre</th>
-      <td><p>Line mitre limit (number greater than 1).</p></td>
-    </tr>
-    <tr>
-      <th>arrow</th>
-      <td><p>Arrow specification, as created by <code><a href='https://rdrr.io/r/grid/arrow.html'>grid::arrow()</a></code>.</p></td>
+      <th>width</th>
+      <td><p>Bar width. By default, set to 90% of the resolution of the data.</p></td>
     </tr>
     <tr>
       <th>na.rm</th>
@@ -236,9 +231,14 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
     <tr>
       <th>element</th>
       <td><p>An <code>element_rect</code> object, typically constructed with
-<code>element_line_*</code> functions. Will inherit from the
-<code>elementalist.geom_line</code> theme element. When <code>NULL</code> this theme
+<code>element_rect_*</code> functions. Will inherit from the
+<code>elementalist.geom_rect</code> theme element. When <code>NULL</code> this theme
 element is taken directly.</p></td>
+    </tr>
+    <tr>
+      <th>stat</th>
+      <td><p>Override the default connection between <code>geom_bar()</code> and
+<code>stat_count()</code>.</p></td>
     </tr>
     <tr>
       <th>orientation</th>
@@ -247,31 +247,64 @@ automatically determines the orientation from the aesthetic mapping. In the
 rare event that this fails it can be given explicitly by setting <code>orientation</code>
 to either <code>"x"</code> or <code>"y"</code>. See the <em>Orientation</em> section for more detail.</p></td>
     </tr>
+    <tr>
+      <th>binwidth</th>
+      <td><p>The width of the bins. Can be specified as a numeric value
+or as a function that calculates width from unscaled x. Here, "unscaled x"
+refers to the original x values in the data, before application of any
+scale transformation. When specifying a function along with a grouping
+structure, the function will be called once per group.
+The default is to use the number of bins in <code>bins</code>,
+covering the range of the data. You should always override
+this value, exploring multiple widths to find the best to illustrate the
+stories in your data.</p>
+<p>The bin width of a date variable is the number of days in each time; the
+bin width of a time variable is the number of seconds.</p></td>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <td><p>Number of bins. Overridden by <code>binwidth</code>. Defaults to 30.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>LayerInstance</code> ggproto object that can be added to a plot.</p>
+    <p>A <code>Layer</code> object that can be added to a plot.</p>
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
 
-<p><code>geom_path_theme()</code> understands the following aesthetics (required aesthetics are in bold):</p><ul>
+<p><code>geom_col_theme()</code> understands the following aesthetics (required aesthetics are in bold):</p><ul>
 <li><p><strong><code>x</code></strong></p></li>
 <li><p><strong><code>y</code></strong></p></li>
 <li><p><code>alpha</code></p></li>
 <li><p><code>colour</code></p></li>
+<li><p><code>fill</code></p></li>
 <li><p><code>group</code></p></li>
 <li><p><code>linetype</code></p></li>
 <li><p><code>size</code></p></li>
 </ul><p>Learn more about setting these aesthetics in <code>vignette("ggplot2-specs")</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ggplot</span>(<span class='no'>pressure</span>, <span class='fu'>aes</span>(<span class='no'>temperature</span>, <span class='no'>pressure</span>)) +
-  <span class='fu'>geom_line_theme</span>() +
+    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='kw'>category</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>5</span>],
+  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>5</span>, <span class='fl'>2</span>, <span class='fl'>8</span>, <span class='fl'>9</span>)
+)
+
+<span class='co'># Styling through the partial theme setters</span>
+<span class='fu'>ggplot</span>(<span class='no'>df</span>, <span class='fu'>aes</span>(<span class='no'>category</span>, <span class='no'>value</span>)) +
+  <span class='fu'>geom_col_theme</span>() +
+  <span class='fu'><a href='wiggle.html'>wiggling_geoms</a></span>()</div><div class='img'><img src='geom_col_theme-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Styling through the `element` argument</span>
+<span class='fu'>ggplot</span>(<span class='no'>mpg</span>, <span class='fu'>aes</span>(<span class='no'>class</span>)) +
+  <span class='fu'>geom_bar_theme</span>(<span class='fu'>aes</span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>class</span>),
+                 <span class='kw'>element</span> <span class='kw'>=</span> <span class='fu'><a href='glow.html'>element_rect_glow</a></span>())</div><div class='img'><img src='geom_col_theme-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Styling through the main theme</span>
+<span class='fu'>ggplot</span>(<span class='no'>diamonds</span>, <span class='fu'>aes</span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span>(<span class='no'>carat</span>))) +
+  <span class='fu'>geom_histogram_theme</span>(<span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>20</span>) +
   <span class='fu'>theme</span>(
-    <span class='kw'>elementalist.geom_line</span> <span class='kw'>=</span> <span class='fu'><a href='wiggle.html'>element_line_wiggle</a></span>(<span class='fl'>10</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)
-  )</div><div class='img'><img src='geom_path_theme-1.png' alt='' width='700' height='433' /></div></pre>
+    <span class='kw'>elementalist.geom_rect</span> <span class='kw'>=</span> <span class='fu'><a href='multicolour.html'>element_rect_multicolour</a></span>()
+  )</div><div class='img'><img src='geom_col_theme-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

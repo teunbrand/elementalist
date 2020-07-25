@@ -21,7 +21,7 @@ Suggests:
     knitr,
     rmarkdown
 Depends: 
-    ggplot2
+    ggplot2 (>= 3.3.0)
 Imports: 
     grid,
     stats,

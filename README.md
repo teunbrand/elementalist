@@ -41,6 +41,10 @@ They are *‘wiggle’*, *‘multicolour’* and *‘glow’*.
 
 #### Wiggle
 
+> It reminded me of the retinal detachment I had last year. Cheers <br>
+> -*[Henrik
+> (2020)](https://stackoverflow.com/questions/63061601/how-to-keep-linetype-spacing-constant-despite-line-size/63080260#comment111549473_63080260)*
+
 Here is an example how you can make your elements wiggle\!
 
 ``` r

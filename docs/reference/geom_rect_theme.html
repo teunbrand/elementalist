@@ -6,9 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>These geoms closely follow <code>geom_rect()</code> and <code>geom_tile()</code> but take
-defaults from the theme and are drawn through theme elements. They use the
-<code>elementalist.geom_rect</code> theme element. — geom_rect_theme • elementalist</title>
+<title>Thematic rectangles — geom_rect_theme • elementalist</title>
 
 
 <!-- jquery -->
@@ -41,9 +39,7 @@ defaults from the theme and are drawn through theme elements. They use the
 
 
 
-<meta property="og:title" content="These geoms closely follow <code>geom_rect()</code> and <code>geom_tile()</code> but take
-defaults from the theme and are drawn through theme elements. They use the
-<code>elementalist.geom_rect</code> theme element. — geom_rect_theme" />
+<meta property="og:title" content="Thematic rectangles — geom_rect_theme" />
 <meta property="og:description" content="These geoms closely follow geom_rect() and geom_tile() but take
 defaults from the theme and are drawn through theme elements. They use the
 elementalist.geom_rect theme element." />
@@ -120,9 +116,7 @@ elementalist.geom_rect theme element." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>These geoms closely follow <code>geom_rect()</code> and <code>geom_tile()</code> but take
-defaults from the theme and are drawn through theme elements. They use the
-<code>elementalist.geom_rect</code> theme element.</h1>
+    <h1>Thematic rectangles</h1>
     <small class="dont-index">Source: <a href='https://github.com/teunbrand/elementalist/blob/master/R/geom_rect_theme.R'><code>R/geom_rect_theme.R</code></a></small>
     <div class="hidden name"><code>geom_rect_theme.Rd</code></div>
     </div>
@@ -142,7 +136,8 @@ defaults from the theme and are drawn through theme elements. They use the
   <span class='kw'>linejoin</span> <span class='kw'>=</span> <span class='st'>"mitre"</span>,
   <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
 <span class='fu'>geom_tile_theme</span>(
@@ -154,7 +149,8 @@ defaults from the theme and are drawn through theme elements. They use the
   <span class='kw'>linejoin</span> <span class='kw'>=</span> <span class='st'>"mitre"</span>,
   <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>element</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -221,6 +217,13 @@ display.</p></td>
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>borders()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>element</th>
+      <td><p>An <code>element_rect</code> object, typically constructed with
+<code>element_rect_*</code> functions. Will inherit from the
+<code>elementalist.geom_rect</code> theme element. When <code>NULL</code> this theme
+element is taken directly.</p></td>
     </tr>
     </table>
 
