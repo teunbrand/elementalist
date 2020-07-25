@@ -33,7 +33,6 @@ URL: https://github.com/teunbrand/elementalist
 BugReports: https://github.com/teunbrand/elementalist/issues
 Collate: 
     'element_line_seq.R'
-    'element_rect_raster.R'
     'element_rect_round.R'
     'element_rect_seq.R'
     'elementalist-extensions.R'
