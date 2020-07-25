@@ -32,10 +32,7 @@ geom_path_theme <- function(
   arrow = NULL, na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE, element = NULL
 ) {
-  if (!is.null(element) &&
-      !inherits(element, c("element_line", "element_blank"))) {
-    stop("The `element` argument should be of type `element_line`")
-  }
+  element <- .check_geom_element(element, "line")
   layer(
     data = data,
     mapping = mapping,
@@ -70,10 +67,7 @@ geom_line_theme <- function(
   element = NULL,
   ...
 ) {
-  if (!is.null(element) &&
-      !inherits(element, c("element_line", "element_blank"))) {
-    stop("The `element` argument should be of type `element_line`")
-  }
+  element <- .check_geom_element(element, "line")
   layer(data = data,
         mapping = mapping,
         stat = stat,

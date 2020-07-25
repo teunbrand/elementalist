@@ -31,3 +31,24 @@ Imports:
 VignetteBuilder: knitr
 URL: https://github.com/teunbrand/elementalist
 BugReports: https://github.com/teunbrand/elementalist/issues
+Collate: 
+    'element_line_seq.R'
+    'element_rect_raster.R'
+    'element_rect_round.R'
+    'element_rect_seq.R'
+    'elementalist-extensions.R'
+    'elementalist-package.R'
+    'geom_rect_theme.R'
+    'geom_col_theme.R'
+    'geom_helpers.R'
+    'geom_path_theme.R'
+    'guide_axis2.R'
+    'style_glow.R'
+    'style_multicolour.R'
+    'style_wiggle.R'
+    'theme_black.R'
+    'theme_registration.R'
+    'utils.R'
+    'utils_elements.R'
+    'utils_lines.R'
+    'zzz.R'

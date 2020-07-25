@@ -11,3 +11,4 @@
 * Added `glow` element style and `element_*_glow()`.
 * Enabled inheriting elements at the layer level.
 * Added `element_rect_round()` for rectangles with rounded corners.
+* Added `geom_col_theme()`, `geom_bar_theme()` and `geom_histogram_theme()`.
