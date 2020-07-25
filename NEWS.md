@@ -10,3 +10,4 @@
 * Added `guide_axis2()` for compatibility with theme elements.
 * Added `glow` element style and `element_*_glow()`.
 * Enabled inheriting elements at the layer level.
+* Added `element_rect_round()` for rectangles with rounded corners.
