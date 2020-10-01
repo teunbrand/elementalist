@@ -117,18 +117,7 @@ resolve_id <- function(id, id.lengths, alt_length) {
   }
 }
 
-# To interpolate colours
-#' @importFrom scales colour_ramp
-col_interpol <- function(col, n) {
-  if (is.null(col)) {
-    return(NULL)
-  }
-  if (length(col) < 2 || n < 2) {
-    return(col)
-  }
-  seq <- seq(0, 1, length.out = n)
-  scales::colour_ramp(col)(seq)
-}
+
 
 .grab_ggplot_internals <- function() {
   objects <- c("axis_label_element_overrides", "draw_axis_labels",
@@ -146,11 +135,3 @@ col_interpol <- function(col, n) {
 }
 
 
-extract_alpha <- function(colour) {
-  if (all(nchar(colour) != 9)) {
-    return(rep(1, length(colour)))
-  }
-  colour <- substr(colour, 8, 9)
-  colour[nchar(colour) != 2] <- "FF"
-  as.integer(as.hexmode(colour)) / 255
-}
