@@ -41,6 +41,10 @@ was_defaulted <- function(x) {
   inherits(x, "defaulted")
 }
 
+is_grouped_variable <- function(x) {
+  inherits(x, 'grouped_variable')
+}
+
 #' @export
 #' @rdname utils_vctrs
 #' @inheritParams vctrs::vec_ptype2

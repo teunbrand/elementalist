@@ -117,7 +117,9 @@ resolve_id <- function(id, id.lengths, alt_length) {
   }
 }
 
-
+length_uni <- function(x) {
+  length(unique(x))
+}
 
 .grab_ggplot_internals <- function() {
   objects <- c("axis_label_element_overrides", "draw_axis_labels",

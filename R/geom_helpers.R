@@ -6,6 +6,10 @@ exchange_defaults <- function(data, type = "line", element) {
 
   data <- as.list(data)
   is_line <- type == "line"
+  is_poly <- type == "polygon"
+  if (is_poly) {
+    first <- which(!duplicated(data$group))
+  }
 
   # Colour
   if ("colour" %in% names(data)) {
@@ -14,6 +18,8 @@ exchange_defaults <- function(data, type = "line", element) {
     } else {
       if (is_line) {
         data$colour <- as_grouped_variable(alpha(data$colour, data$alpha))
+      } else if (is_poly) {
+        data$colour <- data$colour[first]
       } else {
         data$colour <- as_grouped_variable(data$colour)
       }
@@ -25,8 +31,10 @@ exchange_defaults <- function(data, type = "line", element) {
     if (was_defaulted(data$fill)) {
       data$fill <- element$fill
     } else {
-      if (!is_line) {
+      if (!is_line && !is_poly) {
         data$fill <- as_grouped_variable(alpha(data$fill, data$alpha))
+      } else if (is_poly) {
+        data$fill <- alpha(data$fill, data$alpha)[first]
       } else {
         data$fill <- as_grouped_variable(data$fill)
       }
@@ -38,7 +46,11 @@ exchange_defaults <- function(data, type = "line", element) {
     if (was_defaulted(data$size)) {
       data$size <- element$size
     } else {
-      data$size <- as_grouped_variable(data$size)
+      if (is_poly) {
+        data$size <- data$size[first]
+      } else {
+        data$size <- as_grouped_variable(data$size)
+      }
     }
   }
 
@@ -47,7 +59,11 @@ exchange_defaults <- function(data, type = "line", element) {
     if (was_defaulted(data$linetype)) {
       data$linetype <- element$linetype
     } else {
-      data$linetype <- as_grouped_variable(data$linetype)
+      if (is_poly) {
+        data$linetype <- data$linetype[first]
+      } else {
+        data$linetype <- as_grouped_variable(data$linetype)
+      }
     }
   }
 

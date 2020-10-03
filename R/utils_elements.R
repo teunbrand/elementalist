@@ -37,11 +37,11 @@ compute_element <- function(child = NULL, type = "line") {
     elem <- .int$combine_elements(child, parent)
   }
   if (length(class(elem)) < 3) {
-    child <- if (type == "line") {
-      element_line_seq(n = 1)
-    } else {
-      element_rect_seq(n = 1)
-    }
+    child <- switch (type,
+      line = element_line_seq(n = 1),
+      rect = element_rect_seq(n = 1),
+      element_polygon()
+    )
     elem <- .int$combine_elements(child, elem)
   }
 
