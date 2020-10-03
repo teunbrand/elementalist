@@ -116,6 +116,15 @@ element_rect_glow <- function(amount = 3, ...) {
 
 #' @rdname glow
 #' @export
+element_polygon_glow <- function(amount = 3, n = 50, ...) {
+  params <- list(amount = amount, n = n)
+  element_polygon_generic(params = params,
+                          subtype = "element_polygon_glow",
+                          ...)
+}
+
+#' @rdname glow
+#' @export
 glowing_geoms <- function(
   amount = 3, fill = NULL,
   colour = NULL, size = NULL,

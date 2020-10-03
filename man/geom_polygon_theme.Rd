@@ -108,5 +108,5 @@ df <- data.frame(
 
 ggplot(df, aes(x, y, group = id, subgroup = sub_id)) +
   geom_polygon_theme() +
-  theme(elementalist.geom_polygon = element_polygon(size = 5))
+  theme(elementalist.geom_polygon = element_polygon_glow(colour = "blue"))
 }

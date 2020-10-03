@@ -4,6 +4,7 @@
 \alias{glow}
 \alias{element_line_glow}
 \alias{element_rect_glow}
+\alias{element_polygon_glow}
 \alias{glowing_geoms}
 \title{Glowing lines}
 \usage{
@@ -12,6 +13,8 @@ glow(amount = 3)
 element_line_glow(amount = 3, ...)
 
 element_rect_glow(amount = 3, ...)
+
+element_polygon_glow(amount = 3, n = 50, ...)
 
 glowing_geoms(
   amount = 3,
@@ -29,6 +32,9 @@ glowing_geoms(
 \item{amount}{A \code{numeric} larger than 0 for the amount of glow to add.}
 
 \item{...}{Arguments passed to \code{element_*_seq()}.}
+
+\item{n}{An \code{integer} of length one indicating how many points to
+interpolate.}
 
 \item{fill}{Fill colour.}
 
@@ -50,9 +56,6 @@ lengths in consecutive positions in the string.}
 edges are drawn at the top (t), left (l), bottom (b) or right (r),
 respectively. Including all these letters will draw all rectangle edges
 (default), whereas including none of these letters will not draw edges.}
-
-\item{n}{An \code{integer} of length one indicating how many points to
-interpolate.}
 }
 \value{
 For \code{glow()}, a \code{function}.
