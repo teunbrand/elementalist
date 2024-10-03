@@ -62,10 +62,11 @@ df <- data.frame(
 )
 
 ggplot(df, aes(x, y, colour = cat)) +
-  geom_line_theme(size = 1) +
+  geom_line_theme(linewidth = 1) +
   coord_cartesian(clip = "off") +
   theme(
     elementalist.geom_line = element_line_wiggle(6, n = 6),
+    legend.key       = element_rect_wiggle(1, colour = NA), 
     panel.background = element_rect_wiggle(sides = c("lb"),
                                            colour = "black"),
     panel.grid.major = element_line_wiggle(3),

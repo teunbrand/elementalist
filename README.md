@@ -45,7 +45,7 @@ They are *‘wiggle’*, *‘multicolour’* and *‘glow’*.
 > -*[Henrik
 > (2020)](https://stackoverflow.com/questions/63061601/how-to-keep-linetype-spacing-constant-despite-line-size/63080260#comment111549473_63080260)*
 
-Here is an example how you can make your elements wiggle\!
+Here is an example how you can make your elements wiggle!
 
 ``` r
 library(elementalist)
@@ -59,10 +59,11 @@ df <- data.frame(
 )
 
 ggplot(df, aes(x, y, colour = cat)) +
-  geom_line_theme(size = 1) +
+  geom_line_theme(linewidth = 1) +
   coord_cartesian(clip = "off") +
   theme(
     elementalist.geom_line = element_line_wiggle(6, n = 6),
+    legend.key       = element_rect_wiggle(1, colour = NA), 
     panel.background = element_rect_wiggle(sides = c("lb"),
                                            colour = "black"),
     panel.grid.major = element_line_wiggle(3),
@@ -122,7 +123,7 @@ ggplot(df, aes(xmin = x - w / 2, xmax = x + w / 2, ymin = y, ymax = y + 1)) +
 ### Footnotes
 
 This package is still in the experimental phase. Expect some bugs here
-and there and use at your own risk\!
+and there and use at your own risk!
 
 The logo is based on the [‘squared
 circle’](https://en.wikipedia.org/wiki/Alchemical_symbol#/media/File:Squaredcircle.svg)
