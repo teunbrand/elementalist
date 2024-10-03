@@ -8,7 +8,7 @@
 element_rect_seq(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   color = NULL,
   inherit.blank = FALSE,
@@ -18,16 +18,14 @@ element_rect_seq(
 )
 }
 \arguments{
-\item{colour}{Line/border colour. Color is an alias for colour.}
+\item{colour, color}{Line/border colour. Color is an alias for colour.}
 
-\item{size}{Line/border size in mm; text size in pts.}
+\item{linewidth}{Line/border size in mm.}
 
 \item{linetype}{Line type. An integer (0:8), a name (blank, solid,
 dashed, dotted, dotdash, longdash, twodash), or a string with
 an even number (up to eight) of hexadecimal digits which give the
 lengths in consecutive positions in the string.}
-
-\item{color}{Line/border colour. Color is an alias for colour.}
 
 \item{inherit.blank}{Should this element inherit the existence of an
 \code{element_blank} among its parents? If \code{TRUE} the existence of

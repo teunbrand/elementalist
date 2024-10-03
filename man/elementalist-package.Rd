@@ -6,8 +6,7 @@
 \alias{elementalist-package}
 \title{elementalist: Extra elements for ggplot2}
 \description{
-Elementalist provides extra theme elements that fit in ggplot2's 
-    theme system.
+Elementalist provides extra theme elements that fit in ggplot2's theme system.
 }
 \seealso{
 Useful links:

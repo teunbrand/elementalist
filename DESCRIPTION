@@ -11,7 +11,7 @@ Authors@R: person(given = "Teun",
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Licence: MIT + file LICENCE
 Language: en
 Suggests: 
@@ -21,7 +21,7 @@ Suggests:
     knitr,
     rmarkdown
 Depends: 
-    ggplot2 (>= 3.3.0)
+    ggplot2 (>= 3.5.0)
 Imports: 
     grid,
     stats,
@@ -43,7 +43,6 @@ Collate:
     'geom_helpers.R'
     'geom_path_theme.R'
     'geom_polygon_theme.R'
-    'guide_axis2.R'
     'polygon_glow.R'
     'style_glow.R'
     'style_multicolour.R'

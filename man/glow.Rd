@@ -20,7 +20,7 @@ glowing_geoms(
   amount = 3,
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   color = NULL,
   lineend = NULL,
@@ -38,16 +38,14 @@ interpolate.}
 
 \item{fill}{Fill colour.}
 
-\item{colour}{Line/border colour. Color is an alias for colour.}
+\item{colour, color}{Line/border colour. Color is an alias for colour.}
 
-\item{size}{Line/border size in mm; text size in pts.}
+\item{linewidth}{Line/border size in mm.}
 
 \item{linetype}{Line type. An integer (0:8), a name (blank, solid,
 dashed, dotted, dotdash, longdash, twodash), or a string with
 an even number (up to eight) of hexadecimal digits which give the
 lengths in consecutive positions in the string.}
-
-\item{color}{Line/border colour. Color is an alias for colour.}
 
 \item{lineend}{Line end Line end style (round, butt, square)}
 
@@ -67,7 +65,7 @@ For \code{element_line_glow()}, an \code{element_line_seq} type list.
 For \code{glowing_geoms}, a partial \code{theme} object.
 }
 \description{
-Makes copies of lines with increasing size and decreasing alpha, giving an
+Makes copies of lines with increasing linewidth and decreasing alpha, giving an
 glowing appearance. The functions are used in the following way: \describe{
   \item{\code{glow()}}{is a function factory that produces a function that is
   subsequently used in elements to make lines glow}

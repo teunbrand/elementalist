@@ -7,7 +7,7 @@
 element_polygon(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   linejoin = NULL,
   lineend = NULL,
@@ -20,7 +20,7 @@ element_polygon(
 
 \item{colour}{A colour specification for the borders or lines.}
 
-\item{size}{A \code{numeric} for the width of lines in millimetres.}
+\item{linewidth}{A \code{numeric} for the width of lines in millimetres.}
 
 \item{linetype}{A \code{integer} or \code{string} specifying a line type.}
 
