@@ -88,7 +88,7 @@ GeomPolygonTheme <- ggproto(
       default.units = "native",
       colour = munched$colour,
       fill = munched$fill,
-      size = munched$size,
+      linewidth = munched$linewidth,
       linetype = munched$linetype,
       rule = rule
     )

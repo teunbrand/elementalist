@@ -121,14 +121,14 @@ GeomPathTheme <- ggproto(
       linetype <- unique(df$linetype)
       new_df(list(
         solid = identical(linetype, 1) || identical(linetype, "solid"),
-        constant = nrow(unique(df[, c("alpha", "colour", "size", "linetype")])) == 1
+        constant = nrow(unique(df[, c("alpha", "colour", "linewidth", "linetype")])) == 1
       ), n = 1)
     })
     solid_lines <- all(attr$solid)
     constant <- all(attr$constant)
     if (!solid_lines && !constant) {
       stop("geom_path: If you are using dotted or dashed lines,",
-           " colour, size and linetype must be constant over the line")
+           " colour, linewidth and linetype must be constant over the line")
     }
 
     # Work out grouping variables for grobs
@@ -145,7 +145,7 @@ GeomPathTheme <- ggproto(
       element,
       x = munched$x, y = munched$y,
       colour = munched$colour,
-      size = munched$size,
+      linewidth = munched$linewidth,
       linetype = rep_len(munched$linetype, nr)[i],
       lineend = lineend %||% element$lineend,
       default.units = "native", id = id

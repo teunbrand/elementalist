@@ -47,13 +47,13 @@ theme_black <- function(base_size = 11, base_family = "",
   t <- theme(
     line =
       element_line(
-        colour = base_colour, size = base_line_size,
+        colour = base_colour, linewidth = base_line_size,
         linetype = 1, lineend = "butt"
       ),
     rect =
       element_rect(
         fill = "black", colour = base_colour,
-        size = base_rect_size, linetype = 1
+        linewidth = base_rect_size, linetype = 1
       ),
     text =
       element_text(
@@ -113,7 +113,7 @@ theme_black <- function(base_size = 11, base_family = "",
     panel.background = element_rect(fill = NA, colour = alpha(base_colour, 0.02)),
     panel.border = element_blank(),
     panel.grid = element_line(colour = alpha(base_colour, 0.05)),
-    panel.grid.minor = element_line(size = rel(0.5)),
+    panel.grid.minor = element_line(linewidth = rel(0.5)),
     panel.spacing = unit(half_line, "pt"),
     panel.spacing.x = NULL,
     panel.spacing.y = NULL,
@@ -157,7 +157,3 @@ theme_black <- function(base_size = 11, base_family = "",
     complete = TRUE
   )
 }
-
-ggplot(mpg, aes(displ, cty)) + geom_point(aes(colour = manufacturer)) +
-  facet_grid(vars(drv), vars(cyl)) +
-  theme_black()

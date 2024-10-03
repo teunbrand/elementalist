@@ -21,7 +21,7 @@ test_that("element_rect_seq parses sides", {
 
 test_that("element_rect_seq generates grobs", {
   el <- element_rect_seq(fun = wiggle(5), fill = 'grey50', colour = "blue",
-                         sides = 't', size = 2)
+                         sides = 't', linewidth = 2)
 
   grob <- element_grob(el, width = 0.5, height = 0.5)
   expect_s3_class(grob, "gTree")

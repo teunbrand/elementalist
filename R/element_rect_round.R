@@ -24,7 +24,7 @@
 element_rect_round <- function(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   color = NULL,
   inherit.blank = FALSE,
@@ -35,7 +35,7 @@ element_rect_round <- function(
   structure(
     list(fill = fill,
          colour = colour,
-         size = size,
+         linewidth = linewidth,
          linetype = linetype,
          inherit.blank = inherit.blank,
          radius = radius),
@@ -54,14 +54,14 @@ element_grob.element_rect_round <- function(
   element,
   x = 0.5, y = 0.5,
   width = 1, height = 1,
-  fill = NULL, colour = NULL, size = NULL,
+  fill = NULL, colour = NULL, linewidth = NULL,
   linetype = NULL, lineend = "butt", linejoin = "mitre",
   default.units = "npc",
   fun = NULL, ...
 ) {
   fun_gp <- gpar(
     col = colour, fill = fill,
-    lwd = check_zerolength(size * .pt),
+    lwd = check_zerolength(linewidth * .pt),
     lty = linetype,
     lineend = lineend,
     linejoin = linejoin
@@ -69,7 +69,7 @@ element_grob.element_rect_round <- function(
   element_gp <- gpar(
     col = element$colour,
     fill = element$fill,
-    lwd = check_zerolength(element$size * .pt),
+    lwd = check_zerolength(element$linewidth * .pt),
     lty = element$linetype,
     lineend = lineend
   )

@@ -19,7 +19,7 @@
 element_rect_seq <- function(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   color = NULL,
   inherit.blank = FALSE,
@@ -44,7 +44,7 @@ element_rect_seq <- function(
     list(
       fill = fill,
       colour = colour,
-      size = size,
+      linewidth = linewidth,
       linetype = linetype,
       inherit.blank = inherit.blank,
       fun = fun,
@@ -66,14 +66,14 @@ element_grob.element_rect_seq <- function(
   element,
   x = 0.5, y = 0.5,
   width = 1, height = 1,
-  fill = NULL, colour = NULL, size = NULL,
+  fill = NULL, colour = NULL, linewidth = NULL,
   linetype = NULL, lineend = "butt", linejoin = "mitre",
   default.units = "npc",
   fun = NULL, ...
 ) {
   fun_gp <- gpar(
     col = colour, fill = fill,
-    lwd = check_zerolength(size * .pt),
+    lwd = check_zerolength(linewidth * .pt),
     lty = linetype,
     lineend = lineend,
     linejoin = linejoin
@@ -81,7 +81,7 @@ element_grob.element_rect_seq <- function(
   element_gp <- gpar(
     col = element$colour,
     fill = element$fill,
-    lwd = check_zerolength(element$size * .pt),
+    lwd = check_zerolength(element$linewidth * .pt),
     lty = element$linetype,
     lineend = lineend
   )
@@ -131,24 +131,24 @@ rectseqGrob <- function(
   if (inherits(colour, "grouped_variable")) {
     colour <- colour[seg$id]
   }
-  size <- gp$lwd
-  if (inherits(size, "grouped_variable")) {
-    size <- size[seg$id]
+  linewidth <- gp$lwd
+  if (inherits(linewidth, "grouped_variable")) {
+    linewidth <- linewidth[seg$id]
   }
-  proto <- apply_lines(fun, seg$x, seg$y, colour, size, fake_id,
+  proto <- apply_lines(fun, seg$x, seg$y, colour, linewidth, fake_id,
                        default.units, n)
   proto2 <- proto
   if (!is.null(proto$sub_id)) {
     keep <- !duplicated(proto$id)
     proto <- lapply(proto, `[`, keep)
     proto$colour <- proto2$colour
-    proto$size <- proto2$size
+    proto$linewidth <- proto2$linewidth
   }
 
   proto_id <- seg$id[proto$id]
   gp_rect <- gp
   gp_rect$col <- check_zerolength(proto$colour[!duplicated(proto_id)])
-  gp_rect$lwd <- check_zerolength(proto$size[!duplicated(proto_id)])
+  gp_rect$lwd <- check_zerolength(proto$linewidth[!duplicated(proto_id)])
 
   # Make prototype into rectangle-polygon
   rect <- polygonGrob(
@@ -205,7 +205,7 @@ rectseqGrob <- function(
   }
   edges$id <- edges$id[keep]
   gp$col <- check_zerolength(edges$colour)
-  gp$lwd <- check_zerolength(edges$size[keep])
+  gp$lwd <- check_zerolength(edges$linewidth[keep])
 
   edges <- decide_linegrob(
     x = edges$x, y = edges$y, id = edges$id, gp = gp,

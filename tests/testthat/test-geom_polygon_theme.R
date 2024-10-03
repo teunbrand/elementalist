@@ -10,7 +10,7 @@ base <- ggplot(df, aes(x, y, group = id, subgroup = sub_id))
 test_that("geom_polygon_theme can change polygon appearance", {
   base  <- base + geom_polygon_theme()
   ctrl  <- base
-  case1 <- base + theme(elementalist.geom_polygon = element_polygon(size = 5))
+  case1 <- base + theme(elementalist.geom_polygon = element_polygon(linewidth = 5))
   case2 <- base + theme(elementalist.geom_polygon = element_polygon_glow())
 
   cases <- list(ctrl, case1, case2)

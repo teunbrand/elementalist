@@ -4,7 +4,7 @@
 #'
 #' @param fill A colour specification for the fill.
 #' @param colour A colour specification for the borders or lines.
-#' @param size A \code{numeric} for the width of lines in millimetres.
+#' @param linewidth A \code{numeric} for the width of lines in millimetres.
 #' @param linetype A \code{integer} or \code{string} specifying a line type.
 #' @param linejoin One of the following strings: \code{"round"}, \code{"mitre"}
 #'   or \code{"bevel"}.
@@ -27,7 +27,7 @@
 element_polygon <- function(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   linejoin = NULL,
   lineend  = NULL,
@@ -36,7 +36,7 @@ element_polygon <- function(
 ) {
   # Just pass to generic without params or subtypes
   element_polygon_generic(
-    fill = fill, colour = colour, size = size,
+    fill = fill, colour = colour, linewidth = linewidth,
     linetype = linetype, linejoin = linejoin, lineend = lineend,
     color = color, inherit.blank = inherit.blank
   )
@@ -66,7 +66,7 @@ element_polygon <- function(
 element_polygon_generic <- function(
   fill = NULL,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   linetype = NULL,
   linejoin = NULL,
   lineend = NULL,
@@ -82,7 +82,7 @@ element_polygon_generic <- function(
     list(
       fill = fill,
       colour = colour,
-      size = size,
+      linewidth = linewidth,
       linetype = linetype,
       linejoin = linejoin,
       lineend  = lineend,
@@ -99,7 +99,7 @@ element_grob.element_polygon <- function(
   element,
   x = c(0, 0.5, 1, 0.5),
   y = c(0.5, 1, 0.5, 0),
-  colour = NULL, fill = NULL, size = NULL,
+  colour = NULL, fill = NULL, linewidth = NULL,
   linetype = NULL, lineend = "round", linejoin = "round",
   id = NULL, pathId = NULL,
   id.lengths = NULL, pathId.lengths = NULL,
@@ -108,13 +108,13 @@ element_grob.element_polygon <- function(
 ) {
   fun_gp <- gpar(
     col = colour, fill = fill,
-    lwd = check_zerolength(size * .pt),
+    lwd = check_zerolength(linewidth * .pt),
     lty = linetype, lineend = lineend, linejoin = linejoin
   )
 
   element_gp <- gpar(
     col = element$colour, fill = element$fill,
-    lwd = check_zerolength(element$size * .pt),
+    lwd = check_zerolength(element$linewidth * .pt),
     lty = element$linetype,
     lineend = element$linetype, linejoin = element$linejoin
   )

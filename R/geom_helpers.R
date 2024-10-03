@@ -41,15 +41,15 @@ exchange_defaults <- function(data, type = "line", element) {
     }
   }
 
-  # Size
-  if ("size" %in% names(data)) {
-    if (was_defaulted(data$size)) {
-      data$size <- element$size
+  # Linewidth
+  if ("linewidth" %in% names(data)) {
+    if (was_defaulted(data$linewidth)) {
+      data$linewidth <- element$linewidth
     } else {
       if (is_poly) {
-        data$size <- data$size[first]
+        data$linewidth <- data$linewidth[first]
       } else {
-        data$size <- as_grouped_variable(data$size)
+        data$linewidth <- as_grouped_variable(data$linewidth)
       }
     }
   }
@@ -67,7 +67,7 @@ exchange_defaults <- function(data, type = "line", element) {
     }
   }
 
-  checked <- c("colour", "fill", "size", "linetype")
+  checked <- c("colour", "fill", "linewidth", "linetype")
   not_checked <- setdiff(names(data), checked)
   data[not_checked] <- lapply(data[not_checked], unset_default)
 

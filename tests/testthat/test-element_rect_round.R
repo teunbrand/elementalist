@@ -12,7 +12,7 @@ test_that("element_rect_round converts numeric radius", {
 })
 
 test_that("element_rect_round generates grobs", {
-  el <- element_rect_round(colour = "purple", size = 2, radius = 0.4)
+  el <- element_rect_round(colour = "purple", linewidth = 2, radius = 0.4)
   grob <- element_grob(el, width = 0.4, height = 0.4)
   expect_s3_class(grob, "gTree")
   expect_length(grob$children, 1)

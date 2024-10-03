@@ -56,7 +56,7 @@
 wiggle <- function(amount = 3, seed = NULL) {
   seed <- force(seed)
   amount <- amount / 2
-  function(x, y, colour, size = NULL, id, n) {
+  function(x, y, colour, linewidth = NULL, id, n) {
     nn <- n * (length(x) - 1) + 1
     id <- rep(id[1], nn)
     if (!is.null(seed)) {
@@ -68,8 +68,8 @@ wiggle <- function(amount = 3, seed = NULL) {
     x <- seq_between(unclass(x), n)
     y <- seq_between(unclass(y), n)
     col <- c(col_interpol(colour, nn - 1), NA)
-    if (!is.null(size)) {
-      size <- c(rep_len(size, length(x) - 1), NA)
+    if (!is.null(linewidth)) {
+      linewidth <- c(rep_len(linewidth, length(x) - 1), NA)
     }
 
     out <- list(
@@ -78,7 +78,7 @@ wiggle <- function(amount = 3, seed = NULL) {
       dx = unclass(xy$x) - x,
       dy = unclass(xy$y) - y,
       col = col,
-      lwd = size,
+      lwd = linewidth,
       id = id
     )
     out[vapply(out, is.null, logical(1))] <- NULL
@@ -102,19 +102,19 @@ element_rect_wiggle <- function(amount = 3, seed = NULL, ...) {
 #' @export
 wiggling_geoms <- function(
   amount = 5, fill = NULL,
-  colour = NULL, size = NULL,
+  colour = NULL, linewidth = NULL,
   linetype = NULL, color = NULL, lineend = NULL,
   sides = "tlbr", seed = NULL,
   n = 50
 ) {
   theme(
     elementalist.geom_rect = element_rect_wiggle(
-      amount = amount, fill = fill, colour = colour, size = size,
+      amount = amount, fill = fill, colour = colour, linewidth = linewidth,
       linetype = linetype, color = color, n = n, sides = sides,
       seed = seed
     ),
     elementalist.geom_line = element_line_wiggle(
-      amount = amount, colour = colour, size = size,
+      amount = amount, colour = colour, linewidth = linewidth,
       linetype = linetype, color = color, n = n, lineend = lineend,
       seed = seed
     )

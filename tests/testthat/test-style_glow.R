@@ -23,14 +23,14 @@ test_that("element_*_wiggle return correct objects", {
 })
 
 test_that("element_*_glow grobs can be built", {
-  el <- element_line_glow(n = 10, colour = "blue", size = 0.5)
+  el <- element_line_glow(n = 10, colour = "blue", linewidth = 0.5)
   case <- element_grob(el)
   ctrl <- element_grob(element_line())
 
   expect_length(ctrl$x, 2)
   expect_length(case$x, 20)
 
-  el <- element_rect_glow(n = 10, colour = "blue", size = 0.5)
+  el <- element_rect_glow(n = 10, colour = "blue", linewidth = 0.5)
   case <- element_grob(el)
   ctrl <- element_grob(element_rect())
   expect_length(ctrl$x, 1)

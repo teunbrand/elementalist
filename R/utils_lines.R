@@ -78,7 +78,7 @@ apply_lines <- function(
   fun = defer,
   x = 0:1, y = 0:1,
   colour = NULL,
-  size = NULL,
+  linewidth = NULL,
   id = rep(1, length(x)),
   default.units = "npc",
   n = 10
@@ -89,12 +89,12 @@ apply_lines <- function(
   x  <- lapply(seq, inv_subset, x = x)
   y  <- lapply(seq, inv_subset, x = y)
   colour <- grouped_variable(colour, seq)
-  size <- grouped_variable(size, seq)
+  linewidth <- grouped_variable(linewidth, seq)
   id <- lapply(seq, inv_subset, x = id)
 
   # Apply function to data
   outcome <- mapply(fun, x = x, y = y,
-                    colour = colour, size = size,
+                    colour = colour, linewidth = linewidth,
                     id = id, n = n, SIMPLIFY = FALSE)
   # Stitch data back together
   outcome <- lapply(
@@ -111,7 +111,7 @@ apply_lines <- function(
     y <- y + unit(outcome$dy, "cm")
   }
   list(x = x, y = y, id = outcome$id,
-       size = outcome$lwd, colour = outcome$col,
+       linewidth = outcome$lwd, colour = outcome$col,
        sub_id = outcome$sub_id)
 }
 

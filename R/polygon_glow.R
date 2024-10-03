@@ -6,7 +6,7 @@ element_grob.element_polygon_glow <- function(
   element,
   x = c(0, 0.5, 1, 0.5),
   y = c(0.5, 1, 0.5, 0),
-  colour = NULL, fill = NULL, size = NULL,
+  colour = NULL, fill = NULL, linewidth = NULL,
   linetype = NULL, lineend = "round", linejoin = "round",
   id = NULL, pathId = NULL,
   id.lengths = NULL, pathId.lengths = NULL,
@@ -15,13 +15,13 @@ element_grob.element_polygon_glow <- function(
 ) {
   fun_gp <- gpar(
     col = colour, fill = fill,
-    lwd = check_zerolength(size * .pt),
+    lwd = check_zerolength(linewidth * .pt),
     lty = linetype, lineend = lineend, linejoin = linejoin
   )
 
   element_gp <- gpar(
     col = element$colour, fill = element$fill,
-    lwd = check_zerolength(element$size * .pt),
+    lwd = check_zerolength(element$linewidth * .pt),
     lty = element$linetype,
     lineend = element$linetype, linejoin = element$linejoin
   )

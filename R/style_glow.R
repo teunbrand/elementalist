@@ -1,6 +1,6 @@
 #' Glowing lines
 #'
-#' Makes copies of lines with increasing size and decreasing alpha, giving an
+#' Makes copies of lines with increasing linewidth and decreasing alpha, giving an
 #' glowing appearance. The functions are used in the following way: \describe{
 #'   \item{\code{glow()}}{is a function factory that produces a function that is
 #'   subsequently used in elements to make lines glow}
@@ -52,13 +52,13 @@
 #' )
 glow <- function(amount = 3) {
   amount <- force(amount)
-  function(x, y, colour, size = 1, id, n) {
+  function(x, y, colour, linewidth = 1, id, n) {
     if (all(is.na(colour))) {
       out <- list(
         x = x,
         y = y,
         col = colour,
-        lwd = size,
+        lwd = linewidth,
         id = id,
         sub_id = id
       )
@@ -86,14 +86,14 @@ glow <- function(amount = 3) {
     colour <- alpha(colour, rev(ialpha))
     colour <- rep(c(colour), each = len)
 
-    size <- qcauchy(seq(0.5, 0.975, length.out = n), size, amount)
-    size <- rep(c(size), each = len)
+    linewidth <- qcauchy(seq(0.5, 0.975, length.out = n), linewidth, amount)
+    linewidth <- rep(c(linewidth), each = len)
 
     out <- list(
       x = x,
       y = y,
       col = colour,
-      lwd = size,
+      lwd = linewidth,
       id = id,
       sub_id = sub_id
     )
@@ -127,18 +127,18 @@ element_polygon_glow <- function(amount = 3, n = 50, ...) {
 #' @export
 glowing_geoms <- function(
   amount = 3, fill = NULL,
-  colour = NULL, size = NULL,
+  colour = NULL, linewidth = NULL,
   linetype = NULL, color = NULL, lineend = NULL,
   sides = "tlbr",
   n = 50
 ) {
   theme(
     elementalist.geom_rect = element_rect_glow(
-      amount = amount, fill = fill, colour = colour, size = size,
+      amount = amount, fill = fill, colour = colour, linewidth = linewidth,
       linetype = linetype, color = color, n = n, sides = sides
     ),
     elementalist.geom_line = element_line_glow(
-      amount = amount, colour = colour, size = size,
+      amount = amount, colour = colour, linewidth = linewidth,
       linetype = linetype, color = color, n = n, lineend = lineend
     )
   )

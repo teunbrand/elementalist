@@ -122,7 +122,7 @@ GeomRectTheme <- ggproto(
         just = c("left", "top"),
         colour = coords$colour,
         fill = coords$fill,
-        size = coords$size,
+        linewidth = coords$linewidth,
         linetype = coords$linetype,
         linejoin = linejoin,
         lineend = if (identical(linejoin, "round")) "round" else "square"
@@ -161,7 +161,7 @@ GeomTileTheme <- ggproto(
       ymin = y - height / 2, ymax = y + height / 2, height = NULL
     )
   },
-  default_aes = aes(fill = "grey20", colour = NA, size = 0.1, linetype = 1,
+  default_aes = aes(fill = "grey20", colour = NA, linewidth = 0.1, linetype = 1,
                     alpha = NA, width = NA, height = NA),
   required_aes = c("x", "y"),
   draw_key = draw_key_polygon

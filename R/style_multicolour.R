@@ -56,7 +56,7 @@
 #'   panel.background = element_rect_multicolour(colour = rainbow(50))
 #' )
 multicolour <- function() {
-  function(x, y, colour, size = NULL, id, n) {
+  function(x, y, colour, linewidth = NULL, id, n) {
     if (!is.null(colour)) {
       n <- n  + 1
     }
@@ -64,15 +64,15 @@ multicolour <- function() {
     x <- seq_between(unclass(x), n)
     y <- seq_between(unclass(y), n)
     col <- c(col_interpol(colour, nn), NA)
-    if (!is.null(size)) {
-      size <- c(rep_len(size, length(x) - 1), NA)
+    if (!is.null(linewidth)) {
+      linewidth <- c(rep_len(linewidth, length(x) - 1), NA)
     }
     id <- rep(id[1], length(x))
     out <- list(
       x = x,
       y = y,
       col = col,
-      lwd = size,
+      lwd = linewidth,
       id = id
     )
     out[vapply(out, is.null, logical(1))] <- NULL
@@ -97,7 +97,7 @@ element_rect_multicolour <- function(colour = rainbow(10), ...) {
 #' @export
 multicolour_geoms <- function(
   fill = NULL,
-  colour = rainbow(10), size = NULL,
+  colour = rainbow(10), linewidth = NULL,
   linetype = NULL, color = NULL, lineend = NULL,
   sides = "tlbr",
   n = 50
@@ -107,11 +107,11 @@ multicolour_geoms <- function(
   }
   theme(
     elementalist.geom_rect = element_rect_multicolour(
-      fill = fill, colour = colour, size = size,
+      fill = fill, colour = colour, linewidth = linewidth,
       linetype = linetype, n = n, sides = sides
     ),
     elementalist.geom_line = element_line_multicolour(
-      colour = colour, size = size,
+      colour = colour, linewidth = linewidth,
       linetype = linetype, n = n, lineend = lineend
     )
   )

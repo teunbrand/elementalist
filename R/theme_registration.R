@@ -1,7 +1,7 @@
 theme_registration <- function() {
   register_theme_elements(
     elementalist.polygon = element_polygon(
-      fill = "white", colour = "black", size = 0.5, linetype = 1,
+      fill = "white", colour = "black", linewidth = 0.5, linetype = 1,
       inherit.blank = TRUE, linejoin = "round", lineend = "round"
     ),
     elementalist.geom_polygon = element_polygon(),
