@@ -95,7 +95,7 @@ GeomPolygonTheme <- ggproto(
     grob$name <- grobName(grob, "geom_polygon_theme")
     grob
   },
-  use_defaults = function(self, data, params = list(), modifiers = aes()) {
+  use_defaults = function(self, data, params = list(), modifiers = aes(), ...) {
     # Marks variables taken from the default values as the 'defaulted' class.
     provided_names <- union(colnames(data), names(params))
     data <- ggproto_parent(GeomPolygon, self)$use_defaults(

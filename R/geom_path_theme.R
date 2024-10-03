@@ -151,7 +151,7 @@ GeomPathTheme <- ggproto(
       default.units = "native", id = id
     )
   },
-  use_defaults = function(self, data, params = list(), modifiers = aes()) {
+  use_defaults = function(self, data, params = list(), modifiers = aes(), ...) {
     # Marks variables taken from the default values as the 'defaulted' class.
     provided_names <- union(colnames(data), names(params))
     data <- ggproto_parent(GeomLine, self)$use_defaults(
