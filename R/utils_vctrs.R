@@ -106,3 +106,12 @@ vec_cast.double.grouped_variable <- function(x, to, ...) as.double(vec_data(x))
 vec_arith.grouped_variable <- function(op, x, y, ...) {
   as_grouped_variable(vec_arith_base(op, vec_data(x), y))
 }
+
+#' @export
+#' @rdname utils_vctrs
+#' @method vec_arith.numeric defaulted
+#' @noRd
+#' @keywords internal
+vec_arith.numeric.defaulted <- function(op, x, y, ...) {
+  vec_arith(op, x, unclass(y), ...)
+}
