@@ -121,16 +121,7 @@ length_uni <- function(x) {
   length(unique(x))
 }
 
-.grab_ggplot_internals <- function() {
-  objects <- c("axis_label_element_overrides", "draw_axis_labels",
-               "combine_elements")
-  objects <- setNames(nm = objects)
-  out <- lapply(objects, function(i) {
-    utils::getFromNamespace(i, "ggplot2")
-  })
-}
 
-.int <- .grab_ggplot_internals()
 
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
